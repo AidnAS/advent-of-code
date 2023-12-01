@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "aoc"
+version = "2023"
+description = ""
+authors = ["Frode Jacobsen <frode@aidn.no>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+isort = "^5.12.0"
+
+
+[tool.poetry.group.dev.dependencies]
+fixit = "^2.1.0"
+black = "^23.11.0"
+pyright = "^1.1.338"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+all = "aoc.main:main"
+eight = "aoc.eight.solver:main"
+eighteen = "aoc.eighteen.solver:main"
+eleven = "aoc.eleven.solver:main"
+fifteen = "aoc.fifteen.solver:main"
+five = "aoc.five.solver:main"
+four = "aoc.four.solver:main"
+fourteen = "aoc.fourteen.solver:main"
+nine = "aoc.nine.solver:main"
+nineteen = "aoc.nineteen.solver:main"
+one = "aoc.one.solver:main"
+seven = "aoc.seven.solver:main"
+seventeen = "aoc.seventeen.solver:main"
+six = "aoc.six.solver:main"
+sixteen = "aoc.sixteen.solver:main"
+ten = "aoc.ten.solver:main"
+thirteen = "aoc.thirteen.solver:main"
+three = "aoc.three.solver:main"
+twelve = "aoc.twelve.solver:main"
+twenty = "aoc.twenty.solver:main"
+twentyfive = "aoc.twentyfive.solver:main"
+twentyfour = "aoc.twentyfour.solver:main"
+twentyone = "aoc.twentyone.solver:main"
+twentythree = "aoc.twentythree.solver:main"
+twentytwo = "aoc.twentytwo.solver:main"
+two = "aoc.two.solver:main"
