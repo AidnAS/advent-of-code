@@ -52,59 +52,43 @@ internal sealed class Parser
         string line)
     {
         return
-            10 * GetDigit(line, Position.First) 
-            + GetDigit(line, Position.Last);
+            10 * GetFirstDigit(line, Direction.Forward) 
+            + GetFirstDigit(line, Direction.Backward);
     }
 
-    private int GetDigit(
+    private int GetFirstDigit(
         string input,
-        Position position)
+        Direction direction)
     {
-        int digit = 0;
-        var state = initialState;
-        int currentMatchStart = -1;
-        for (int i = 0; i < input.Length; i++)
+        for (int step = 0; step < input.Length; step++)
         {
-            var c = input[i];
-            if (!state.NextMap.TryGetValue(c, out state))
+            int globalIndex = direction == Direction.Forward
+                ? step
+                : input.Length - 1 - step;
+            
+            var state = initialState;
+            for (int localIndex = globalIndex; localIndex < input.Length; localIndex++)
             {
-                if (currentMatchStart != -1)
-                {
-                    i = currentMatchStart;
-                    currentMatchStart = -1;
-                }
-
-                state = initialState;
-                continue;
-            }
-
-            if (currentMatchStart == -1)
-            {
-                currentMatchStart = i;
-            }
-
-            if (state.Digit.HasValue)
-            {
-                digit = state.Digit.Value;
-
-                i = currentMatchStart;
-                currentMatchStart = -1;
-                state = initialState;
-
-                if (position == Position.First)
+                var token = input[localIndex];
+                if (!state.NextMap.TryGetValue(token, out state))
                 {
                     break;
+                }
+
+                if (state.Digit.HasValue)
+                {
+                    return state.Digit.Value;
                 }
             }
         }
 
-        return digit;
+        return 0;
     }
 
-    private enum Position
+    private enum Direction
     {
-        First,
-        Last
+        Forward,
+        Backward
     }
 
     private sealed class State
