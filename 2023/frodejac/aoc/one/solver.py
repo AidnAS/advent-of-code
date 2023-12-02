@@ -1,6 +1,4 @@
-import os
 import re
-import sys
 
 
 def part1(lines):

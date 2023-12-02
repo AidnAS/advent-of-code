@@ -1,48 +1,63 @@
 import importlib
+import multiprocessing
 import os
 import time
 
-days = [
-    "eight",
-    "eighteen",
-    "eleven",
-    "fifteen",
-    "five",
-    "four",
-    "fourteen",
-    "nine",
-    "nineteen",
-    "one",
-    "seven",
-    "seventeen",
-    "six",
-    "sixteen",
-    "ten",
-    "thirteen",
-    "three",
-    "twelve",
-    "twenty",
-    "twentyfive",
-    "twentyfour",
-    "twentyone",
-    "twentythree",
-    "twentytwo",
-    "two",
-]
+
+def solve(day):
+    try:
+        solver = importlib.import_module(f"aoc.{day}.solver")
+        t0 = time.time()
+        p1, p2 = solver.solve(os.path.join("aoc", day, "input.txt"))
+        elapsed = time.time() - t0
+        return day, p1, p2, elapsed
+    except ModuleNotFoundError:
+        return day, "nil", "nil", "n/a"
+
+
+def output(results, elapsed, w=20, d=6):
+    print(f"Completed in {elapsed:.{d}} seconds\n")
+    print(f"{'day':>12} | {'part1':^{w}} | {'part2':^{w}} | {'elapsed':^{w}}")
+    print(f" {'-' * 12}+{'-' * (w + 2)}+{'-' * (w + 2)}+{'-' * (w + 2)}")
+    for day, p1, p2, elapsed in results:
+        print(f"{day:>12} | {p1:>{w}} | {p2:>{w}} | {elapsed:>{w}.{d}}")
 
 
 def main():
-    print(f"{'day':>12} | {'part1':^15} | {'part2':^15} | {'elapsed':^15}")
-    print("-------------+-----------------+-----------------+-----------------")
-    for i, day in enumerate(days):
-        try:
-            solver = importlib.import_module(f"aoc.{day}.solver")
-            t0 = time.time()
-            p1, p2 = solver.solve(os.path.join("aoc", day, "input.txt"))
-            elapsed = time.time() - t0
-            print(f"{day:>12} | {p1:>15} | {p2:>15} | {elapsed:>15.6f}")
-        except ModuleNotFoundError:
-            print(f"{day:>12} | {'nil':>15} | {'nil':>15} | {'n/a':>15}")
+    t0 = time.time()
+    with multiprocessing.Pool() as pool:
+        results = pool.map(
+            solve,
+            (
+                "eight",
+                "eighteen",
+                "eleven",
+                "fifteen",
+                "five",
+                "four",
+                "fourteen",
+                "nine",
+                "nineteen",
+                "one",
+                "seven",
+                "seventeen",
+                "six",
+                "sixteen",
+                "ten",
+                "thirteen",
+                "three",
+                "twelve",
+                "twenty",
+                "twentyfive",
+                "twentyfour",
+                "twentyone",
+                "twentythree",
+                "twentytwo",
+                "two",
+            ),
+        )
+    elapsed = time.time() - t0
+    output(results, elapsed)
 
 
 if __name__ == "__main__":
