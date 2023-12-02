@@ -15,21 +15,34 @@ fn number_literal_to_char(number: &str) -> char {
     }
 }
 
-pub fn find_first_and_last_number(content: String, number_literals: &[&str]) -> u32 {
-    // Further optimization could be done by terminating literal searches early if we've iterated past the first known literal char position
-    let first_number_char = number_literals
-        .iter()
-        .filter_map(|literal| content.find(literal).map(|position| (*literal, position)))
-        .min_by_key(|(_, position)| *position)
-        .map(|(literal, _)| number_literal_to_char(literal))
-        .expect("At least one number literal exists");
+pub fn find_first_and_last_number(content: &str, number_literals: &[&str]) -> u32 {
+    // Shrink the relevant sub-content we're searching in when we find improvements
+    let mut sub_content: &str = content;
+    let mut first_number_literal = None;
 
-    let last_number_char = number_literals
-        .iter()
-        .filter_map(|literal| content.rfind(literal).map(|position| (*literal, position)))
-        .max_by_key(|(_, position)| *position)
-        .map(|(literal, _)| number_literal_to_char(literal))
-        .expect("At least one number literal exists");
+    for number_literal in number_literals {
+        if let Some(position) = sub_content.find(number_literal) {
+            first_number_literal = Some(number_literal);
+            sub_content = &sub_content[..position + 1];
+        }
+    }
+
+    let first_number_char = number_literal_to_char(
+        first_number_literal.expect("At least one number literal was found"),
+    );
+
+    let mut sub_content: &str = content;
+    let mut last_number_literal = None;
+
+    for number_literal in number_literals {
+        if let Some(position) = sub_content.rfind(number_literal) {
+            last_number_literal = Some(number_literal);
+            sub_content = &sub_content[position..];
+        }
+    }
+
+    let last_number_char =
+        number_literal_to_char(last_number_literal.expect("At least one number literal was found"));
 
     format!("{}{}", first_number_char, last_number_char)
         .parse::<u32>()
@@ -47,7 +60,7 @@ pub fn solve() -> SolutionPair {
         .lines()
         .map(|line| -> u32 {
             let content = line.expect("Line can be parsed");
-            find_first_and_last_number(content, &number_literals)
+            find_first_and_last_number(&content, &number_literals)
         })
         .sum();
 
@@ -61,7 +74,7 @@ pub fn solve() -> SolutionPair {
         .lines()
         .map(|line| -> u32 {
             let content = line.expect("Line can be parsed");
-            find_first_and_last_number(content, &number_literals)
+            find_first_and_last_number(&content, &number_literals)
         })
         .sum();
 
