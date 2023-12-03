@@ -39,7 +39,11 @@ defmodule Day2 do
       game_config.max_cubes.blue <= available_cubes.blue
   end
 
-  def solve(file, available_cubes) do
+  def power_of(cubes) do
+    cubes.green * cubes.red * cubes.blue
+  end
+
+  def solve_1(file, available_cubes) do
     possible_games =
       File.stream!(file)
       |> Stream.map(&String.trim/1)
@@ -51,6 +55,19 @@ defmodule Day2 do
     Enum.to_list(possible_games)
     |> Enum.sum()
   end
+
+  def solve_2(file) do
+    minimal_power_sets =
+      File.stream!(file)
+      |> Stream.map(&String.trim/1)
+      |> Stream.map(&String.split(&1, ~r{:|;}))
+      |> Stream.map(&to_game(&1))
+      |> Stream.map(&power_of(&1.max_cubes))
+
+    Enum.to_list(minimal_power_sets)
+    |> Enum.sum()
+  end
 end
 
-IO.puts(Day2.solve("input.txt", %{:red => 12, :green => 13, :blue => 14}))
+IO.puts(Day2.solve_1("input.txt", %{:red => 12, :green => 13, :blue => 14}))
+IO.puts(Day2.solve_2("input.txt"))
