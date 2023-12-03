@@ -23,7 +23,7 @@ def p1(a):
     )
 
 
-def part2(a):
+def p2(a):
     return sum(
         reduce(lambda b, c: b * c, d.values())
         for d in map(
@@ -40,7 +40,7 @@ def part2(a):
 def solve(inputpath):
     with open(inputpath) as f:
         data = f.readlines()
-    return p1(data), part2(data)
+    return p1(data), p2(data)
 
 
 def main():
