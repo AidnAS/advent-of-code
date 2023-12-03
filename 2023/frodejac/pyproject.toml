@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "aoc"
-version = "2023"
-description = ""
 authors = ["Frode Jacobsen <frode@aidn.no>"]
+description = "Advent of Code"
+license = "MIT"
+name = "aoc"
 readme = "README.md"
+version = "2023"
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -17,11 +18,12 @@ flake8-bugbear = "^23.11.28"
 ipython = "^8.18.1"
 isort = "^5.12.0"
 pyright = "^1.1.338"
+pytest = "^7.4.3"
 vulture = "^2.10"
 
 [build-system]
-requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
 
 [tool.black]
 target-version = ["py311"]
@@ -47,6 +49,7 @@ seventeen = "aoc.seventeen.solver:main"
 six = "aoc.six.solver:main"
 sixteen = "aoc.sixteen.solver:main"
 ten = "aoc.ten.solver:main"
+tests = "pytest:main"
 thirteen = "aoc.thirteen.solver:main"
 three = "aoc.three.solver:main"
 twelve = "aoc.twelve.solver:main"
