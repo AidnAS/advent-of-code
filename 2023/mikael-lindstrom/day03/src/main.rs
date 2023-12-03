@@ -49,12 +49,8 @@ fn parse(input: &str) -> (Vec<PartNumber>, Vec<Gear>) {
             line.char_indices().filter(|(_, c)| *c != '.').fold(
                 (Vec::<PartNumber>::new(), Vec::<Gear>::new()),
                 |mut acc, (x, c)| {
-                    if !c.is_digit(10) {
-                        acc.1.push(Gear {
-                            gear: c,
-                            x: x,
-                            y: y,
-                        });
+                    if !c.is_ascii_digit() {
+                        acc.1.push(Gear { gear: c, x, y });
                         return acc;
                     }
                     if let Some(last_part) = acc.0.last_mut() {
@@ -66,8 +62,8 @@ fn parse(input: &str) -> (Vec<PartNumber>, Vec<Gear>) {
                     }
                     acc.0.push(PartNumber {
                         number: c.to_string(),
-                        x: x,
-                        y: y,
+                        x,
+                        y,
                         width: 1,
                     });
                     acc
@@ -89,7 +85,7 @@ fn part1(input: &str) -> u32 {
         .filter_map(|part_number| {
             let valid = gears
                 .iter()
-                .filter(|gear| part_number.is_adjacent(*gear))
+                .filter(|gear| part_number.is_adjacent(gear))
                 .count()
                 > 0;
             if valid {
@@ -110,7 +106,7 @@ fn part2(input: &str) -> u32 {
                     .iter()
                     .filter(|part_number| part_number.is_adjacent(gear))
                     .collect::<Vec<_>>();
-                if adjacent_part_numbers.iter().count() == 2 {
+                if adjacent_part_numbers.len() == 2 {
                     return Some(
                         adjacent_part_numbers
                             .iter()

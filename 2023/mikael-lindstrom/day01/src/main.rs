@@ -21,7 +21,7 @@ fn part2(input: &str) -> u32 {
             line.chars()
                 .enumerate()
                 .fold(Vec::new(), |mut acc, (index, c)| {
-                    if c.is_digit(10) {
+                    if c.is_ascii_digit() {
                         acc.push(c.to_digit(10).unwrap())
                     } else {
                         let substring = &line[index..];

@@ -8,7 +8,7 @@ fn part1(input: &str) -> u32 {
                 .split("; ")
                 .map(|rounds| {
                     rounds.split(", ").fold(true, |valid, round| {
-                        match round.split_once(" ").unwrap() {
+                        match round.split_once(' ').unwrap() {
                             (amount, "red") => valid && amount.parse::<u32>().unwrap() <= 12,
                             (amount, "green") => valid && amount.parse::<u32>().unwrap() <= 13,
                             (amount, "blue") => valid && amount.parse::<u32>().unwrap() <= 14,
@@ -16,7 +16,7 @@ fn part1(input: &str) -> u32 {
                         }
                     })
                 })
-                .all(|v| v == true);
+                .all(|v| v);
             if valid {
                 return Some(game_id);
             }
@@ -30,12 +30,11 @@ fn part2(input: &str) -> u32 {
         .lines()
         .map(|line| {
             line.split(": ")
-                .skip(1)
-                .next()
+                .nth(1)
                 .unwrap()
                 .split([';', ','])
                 .fold([0, 0, 0], |[mut r, mut g, mut b], color| {
-                    match color.trim().split_once(" ").unwrap() {
+                    match color.trim().split_once(' ').unwrap() {
                         (amount, "red") => r = amount.parse::<u32>().unwrap().max(r),
                         (amount, "green") => g = amount.parse::<u32>().unwrap().max(g),
                         (amount, "blue") => b = amount.parse::<u32>().unwrap().max(b),
