@@ -1,0 +1,19 @@
+[package]
+name = "aoc"
+version = "0.1.0"
+edition = "2021"
+
+[dev-dependencies]
+criterion = "0.5.1"
+
+[lib]
+bench = false
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+bench = false
+
+[[bench]]
+name = "puzzles"
+harness = false
