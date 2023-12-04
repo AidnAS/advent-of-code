@@ -12,6 +12,8 @@ fn bench_puzzles(c: &mut Criterion) {
     group.bench_function("day02part02", |b| b.iter(aoc::day02::part02));
     group.bench_function("day03part01", |b| b.iter(aoc::day03::part01));
     group.bench_function("day03part02", |b| b.iter(aoc::day03::part02));
+    group.bench_function("day04part01", |b| b.iter(aoc::day04::part01));
+    group.bench_function("day04part02", |b| b.iter(aoc::day04::part02));
     group.finish()
 }
 

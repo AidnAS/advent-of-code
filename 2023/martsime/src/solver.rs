@@ -3,6 +3,7 @@ use std::hint::black_box;
 use std::time::Duration;
 
 use crate::solution::Solution;
+use crate::utils;
 
 pub struct PartResult {
     pub day: u8,
@@ -13,19 +14,14 @@ pub struct PartResult {
 
 impl Display for PartResult {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        writeln!(f, "==================")?;
-        writeln!(f, "Day {:02} Part {:02}", self.day, self.part,)?;
-        let nanos = self.duration.as_nanos() as f64;
-        if nanos < 1_000.0 {
-            writeln!(f, "Runtime: {:7.3}ns", nanos)?;
-        } else if nanos < 1_000_000.0 {
-            writeln!(f, "Runtime: {:7.3}μs", nanos / 1_000.0)?;
-        } else if nanos < 1_000_000_000.0 {
-            writeln!(f, "Runtime: {:7.3}ms", nanos / 1_000_000.0)?;
-        } else {
-            writeln!(f, "Runtime: {:7.3}s ", nanos / 1_000_000_000.0)?;
-        }
-        writeln!(f, "Result: {}", self.result)
+        write!(
+            f,
+            "[{:>9}] Day {:02} Part {:02}: {}",
+            utils::format_duration(&self.duration),
+            self.day,
+            self.part,
+            self.result
+        )
     }
 }
 
