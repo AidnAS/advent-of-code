@@ -8,40 +8,60 @@ async function day2(task: number, dayFileHandle: FileHandle) {
 
     if (!gameIdMatch || !gamesMatch) return 'DATA ERROR!';
 
-    const gameId = gameIdMatch[1];
+    const gameId = parseInt(gameIdMatch[1]);
     const gamesData = gamesMatch[1].split(';');
     let invalid = false;
+    let highestNumbers = { red: 0, green: 0, blue: 0 };
+    const gameHighestNumbers = new Map();
 
     gamesData.forEach((gameData) => {
       gameData.split(',').every((game) => {
-        const cubes = /(\d+)\s(red|blue|green)/.exec(game.trim());
+        const cubes = /(\d+)\s(red|green|blue)/.exec(game.trim());
         if (!cubes) return;
 
-        switch (cubes[2]) {
+        const color = String(cubes[2]) as 'red' | 'green' | 'blue';
+        const value = parseInt(cubes[1]);
+
+        if (highestNumbers[color] < value) {
+          highestNumbers[color] = value;
+        }
+
+        gameHighestNumbers.set(gameId, highestNumbers);
+
+        if (task === 2) return true;
+
+        switch (color) {
           case 'red':
-            if (parseInt(cubes[1]) > 12) {
+            if (value > 12) {
               invalid = true;
             }
             break;
           case 'green':
-            if (parseInt(cubes[1]) > 13) {
+            if (value > 13) {
               invalid = true;
             }
             break;
           case 'blue':
-            if (parseInt(cubes[1]) > 14) {
+            if (value > 14) {
               invalid = true;
             }
             break;
         }
 
-        if (invalid) return false;
+        if (invalid && task === 1) return false;
         return true;
       });
     });
 
-    if (!invalid) {
-      result += parseInt(gameId);
+    if (task === 1 && !invalid) {
+      result += gameId;
+    }
+
+    if (task === 2) {
+      gameHighestNumbers.forEach((nums) => {
+        const gameResult = nums['red'] * nums['green'] * nums['blue'];
+        result += gameResult;
+      });
     }
   }
 
