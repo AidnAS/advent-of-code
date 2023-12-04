@@ -2,6 +2,7 @@
 name = "aoc"
 version = "0.1.0"
 edition = "2021"
+default-run = "main"
 
 [dev-dependencies]
 criterion = "0.5.1"
@@ -12,6 +13,11 @@ bench = false
 [[bin]]
 name = "main"
 path = "src/main.rs"
+bench = false
+
+[[bin]]
+name = "table"
+path = "src/bin/table.rs"
 bench = false
 
 [[bench]]
