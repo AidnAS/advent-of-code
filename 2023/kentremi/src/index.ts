@@ -2,6 +2,7 @@ import * as fsPromise from 'fs/promises';
 
 import { Command } from 'commander';
 import day1 from './days/day1';
+import day2 from './days/day2';
 import figlet from 'figlet';
 import gradient from 'gradient-string';
 import { printResult } from './utils';
@@ -38,6 +39,8 @@ async function executeDay(dayTask: string, isTest: boolean = false) {
       return printResult('1-1', await day1(1, dayFileHandle));
     case '1-2':
       return printResult('1-2', await day1(2, dayFileHandle));
+    case '2-1':
+      return printResult('2-1', await day2(1, dayFileHandle));
     default:
       console.log(christmasGradient(`Daytask ${dayTask} is not ready yet!`));
   }
