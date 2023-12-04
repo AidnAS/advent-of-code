@@ -1,26 +1,78 @@
-use std::collections::HashSet;
-
 use crate::solution::Solution;
 
-fn parse_numbers(input: &str) -> HashSet<u32> {
-    input
-        .split(' ')
-        .filter_map(|n| match n {
-            "" => None,
-            _ => Some(n.parse::<u32>().unwrap()),
-        })
-        .collect()
+struct Buffer<const N: usize, T> {
+    buffer: [T; N],
+    index: usize,
 }
 
-fn solve_part01(input: &str) -> u32 {
+impl<const N: usize, T: Default + Copy + Eq> Buffer<N, T> {
+    #[inline(always)]
+    fn new() -> Self {
+        Self {
+            buffer: [Default::default(); N],
+            index: 0,
+        }
+    }
+
+    #[inline(always)]
+    fn insert(&mut self, value: T) {
+        self.buffer[self.index] = value;
+        self.index += 1;
+    }
+
+    #[inline(always)]
+    fn clear(&mut self) {
+        self.index = 0;
+    }
+
+    #[inline(always)]
+    fn iter(&self) -> impl Iterator<Item = &T> {
+        self.buffer.iter().take(self.index)
+    }
+
+    #[inline(always)]
+    fn slice(&self) -> &[T] {
+        &self.buffer[..self.index]
+    }
+
+    #[inline(always)]
+    fn intersection(&self, other: &Self) -> usize {
+        self.slice()
+            .iter()
+            .filter(|&n| other.iter().any(|m| n == m))
+            .count()
+    }
+}
+
+type Number = [u8; 2];
+
+fn solve_part01(input: &[u8]) -> u32 {
+    const BUFFER_SIZE: usize = 100;
+    let mut winning_numbers: Buffer<BUFFER_SIZE, Number> = Buffer::new();
+    let mut numbers: Buffer<BUFFER_SIZE, Number> = Buffer::new();
     input
-        .lines()
+        .split(|&b| b == b'\n')
         .map(|line| {
-            let (_, card) = line.split_once(": ").unwrap();
-            let (winning_string, numbers_string) = card.split_once(" | ").unwrap();
-            let (winning_numbers, numbers) =
-                (parse_numbers(winning_string), parse_numbers(numbers_string));
-            let numbers_matching = winning_numbers.intersection(&numbers).count() as u32;
+            winning_numbers.clear();
+            numbers.clear();
+            let mut index = line.iter().position(|b| b == &b':').unwrap() + 2;
+            let length = line.len();
+            let mut first_buffer = true;
+            while index < length {
+                if line[index] == b'|' {
+                    index += 2;
+                    first_buffer = false;
+                    continue;
+                }
+                if first_buffer {
+                    winning_numbers.insert([line[index], line[index + 1]]);
+                    index += 3;
+                } else {
+                    numbers.insert([line[index], line[index + 1]]);
+                    index += 3;
+                }
+            }
+            let numbers_matching = winning_numbers.intersection(&numbers) as u32;
             match numbers_matching {
                 0 => 0,
                 _ => 2u32.pow(numbers_matching - 1),
@@ -29,34 +81,51 @@ fn solve_part01(input: &str) -> u32 {
         .sum::<u32>()
 }
 
-fn solve_part02(input: &str) -> u32 {
-    let num_cards = input.lines().count();
-    let mut copies = vec![1; num_cards];
+fn solve_part02(input: &[u8]) -> u32 {
+    const BUFFER_SIZE: usize = 100;
+    let mut winning_numbers: Buffer<BUFFER_SIZE, Number> = Buffer::new();
+    let mut numbers: Buffer<BUFFER_SIZE, Number> = Buffer::new();
+    let mut copies = [1u32; 1_000];
     input
-        .lines()
+        .split(|&b| b == b'\n')
         .enumerate()
         .map(|(card_index, line)| {
-            let (_, card) = line.split_once(": ").unwrap();
-            let (winning_string, numbers_string) = card.split_once(" | ").unwrap();
-            let (winning_numbers, numbers) =
-                (parse_numbers(winning_string), parse_numbers(numbers_string));
-            let numbers_matching = winning_numbers.intersection(&numbers).count();
+            winning_numbers.clear();
+            numbers.clear();
+            let mut index = line.iter().position(|b| b == &b':').unwrap() + 2;
+            let length = line.len();
+            let mut first_buffer = true;
+            while index < length {
+                if line[index] == b'|' {
+                    index += 2;
+                    first_buffer = false;
+                    continue;
+                }
+                if first_buffer {
+                    winning_numbers.insert([line[index], line[index + 1]]);
+                    index += 3;
+                } else {
+                    numbers.insert([line[index], line[index + 1]]);
+                    index += 3;
+                }
+            }
+            let numbers_matching = winning_numbers.intersection(&numbers);
             let card_copies = copies[card_index];
 
             (card_index + 1..=(card_index + numbers_matching)).for_each(|i| {
                 copies[i] += card_copies;
             });
-            card_copies as u32
+            card_copies
         })
         .sum::<u32>()
 }
 
 pub fn part01() -> Solution {
-    solve_part01(include_str!("input.txt")).into()
+    solve_part01(include_bytes!("input.txt")).into()
 }
 
 pub fn part02() -> Solution {
-    solve_part02(include_str!("input.txt")).into()
+    solve_part02(include_bytes!("input.txt")).into()
 }
 
 #[cfg(test)]
@@ -65,14 +134,14 @@ mod tests {
 
     #[test]
     fn day04_part01() {
-        let input = include_str!("input_test.txt");
+        let input = include_bytes!("input_test.txt");
         let solution = solve_part01(input);
         assert_eq!(solution, 13);
     }
 
     #[test]
     fn day04_part02() {
-        let input = include_str!("input_test.txt");
+        let input = include_bytes!("input_test.txt");
         let solution = solve_part02(input);
         assert_eq!(solution, 30);
     }
