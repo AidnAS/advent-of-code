@@ -1,7 +1,6 @@
 use itertools::Itertools;
 
 use crate::{Solution, SolutionPair};
-use std::collections::HashSet;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
@@ -13,12 +12,11 @@ fn get_winnings_from_line(line: &str) -> u32 {
         .last()
         .expect("Has tail element")
         .split_whitespace()
-        .collect::<HashSet<_>>();
+        .collect::<Vec<_>>();
 
-    // Faster than intersecting the two sets
     numbers
         .split_whitespace()
-        .filter(|&num| winning_numbers.contains(num))
+        .filter(|&num| winning_numbers.contains(&num))
         .count() as u32
 }
 
