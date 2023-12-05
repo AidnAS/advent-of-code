@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day02CubeConundrum", "Day02
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day03GearRatios", "Day03GearRatios\Day03GearRatios.csproj", "{4F03DC47-FF0A-4CB7-AE22-B627050CD443}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day04Scratchcards", "Day04Scratchcards\Day04Scratchcards.csproj", "{CEDB9EB6-AFC6-4B30-A404-B156AA6B3B4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day04Scratchcards", "Day04Scratchcards\Day04Scratchcards.csproj", "{CEDB9EB6-AFC6-4B30-A404-B156AA6B3B4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day05IfYouGiveASeedAFertilizer", "Day05IfYouGiveASeedAFertilizer\Day05IfYouGiveASeedAFertilizer.csproj", "{A7C60A38-424C-41F2-AA60-CAE0AEFC003C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CEDB9EB6-AFC6-4B30-A404-B156AA6B3B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEDB9EB6-AFC6-4B30-A404-B156AA6B3B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEDB9EB6-AFC6-4B30-A404-B156AA6B3B4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7C60A38-424C-41F2-AA60-CAE0AEFC003C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7C60A38-424C-41F2-AA60-CAE0AEFC003C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7C60A38-424C-41F2-AA60-CAE0AEFC003C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7C60A38-424C-41F2-AA60-CAE0AEFC003C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
