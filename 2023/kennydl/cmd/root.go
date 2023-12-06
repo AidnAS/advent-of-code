@@ -11,6 +11,7 @@ import (
 	"advent.of.code.2023/cmd/solver/day1"
 	"advent.of.code.2023/cmd/solver/day2"
 	"advent.of.code.2023/cmd/solver/day3"
+	"advent.of.code.2023/cmd/solver/day4"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +27,7 @@ var rootCmd = &cobra.Command{
 
 		for i, dayValue := range args {
 			day, err := strconv.Atoi(dayValue)
-			if err != nil || day < 1 || day > 24 {
+			if err != nil || day < 1 || day > 25 {
 				fmt.Println("The input day \"" + dayValue + "\" is not valid.")
 				continue
 			}
@@ -58,6 +59,8 @@ func runDay(day int) {
 			day2.Run()
 		case 3:
 			day3.Run()
+		case 4:
+			day4.Run()
 		default:
 			fmt.Println(" - Not solved yet! Coming soon...")
 	}
