@@ -45,16 +45,25 @@ fn solve_part01(input: &str) -> u32 {
     total
 }
 
-fn solve_part02(input: &str) -> i64 {
+fn solve_part02(input: &str) -> u64 {
+    // The inequality we want to solve is:
+    // x * (time - x) > record
+    // Rewritten as:
+    // x^2 - time * x + record < 0
+    // This is a quadratic inequality, in which the left hand is an upside down parabola, meaning
+    // every point between the solutions to the quadratic equality satisfies the inequality
+    // x = (-b +- sqrt(b^2 - 4ac)) / 2a
     let (time, record) = parse_part02(input);
-    let mut better_ways = 0;
-    for hold_time in 1..time {
-        let drive_time = time - hold_time;
-        if drive_time * hold_time > record {
-            better_ways += 1;
-        }
-    }
-    better_ways
+
+    let a = 1f64;
+    let b = -(time as f64);
+    let c = record as f64;
+
+    let x1 = (-b + (b * b - 4f64 * a * c).sqrt()) / (2f64 * a);
+    let x2 = (-b - (b * b - 4f64 * a * c).sqrt()) / (2f64 * a);
+
+    let (x1, x2) = if x1 < x2 { (x1, x2) } else { (x2, x1) };
+    x2.floor() as u64 - x1.ceil() as u64 + 1
 }
 
 pub fn part01() -> Solution {
