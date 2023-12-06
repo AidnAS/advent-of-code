@@ -14,10 +14,10 @@ python = "^3.11"
 black = "^23.11.0"
 fixit = "^2.1.0"
 flake8 = "^6.1.0"
-flake8-bugbear = "^23.11.28"
+flake8-bugbear = "^23.12.2"
 ipython = "^8.18.1"
 isort = "^5.12.0"
-pyright = "^1.1.338"
+pyright = "^1.1.339"
 pytest = "^7.4.3"
 vulture = "^2.10"
 
@@ -27,9 +27,7 @@ requires = ["poetry-core"]
 
 [tool.black]
 target-version = ["py311"]
-extend-exclude = '''
-    aoc/four/golf.py
-'''
+extend-exclude = '.*golf.py'
 
 [tool.vulture]
 exclude = [".venv/"]
