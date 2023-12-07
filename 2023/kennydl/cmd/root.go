@@ -12,6 +12,7 @@ import (
 	"advent.of.code.2023/cmd/solver/day2"
 	"advent.of.code.2023/cmd/solver/day3"
 	"advent.of.code.2023/cmd/solver/day4"
+	"advent.of.code.2023/cmd/solver/day5"
 	"github.com/spf13/cobra"
 )
 
@@ -61,6 +62,8 @@ func runDay(day int) {
 			day3.Run()
 		case 4:
 			day4.Run()
+		case 5:
+			day5.Run()
 		default:
 			fmt.Println(" - Not solved yet! Coming soon...")
 	}
