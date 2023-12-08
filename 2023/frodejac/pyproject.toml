@@ -11,12 +11,9 @@ python = "^3.11"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.11.0"
+ruff = "^0.1.7"
 fixit = "^2.1.0"
-flake8 = "^6.1.0"
-flake8-bugbear = "^23.12.2"
 ipython = "^8.18.1"
-isort = "^5.12.0"
 pyright = "^1.1.339"
 pytest = "^7.4.3"
 vulture = "^2.10"
@@ -25,9 +22,8 @@ vulture = "^2.10"
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
-[tool.black]
-target-version = ["py311"]
-extend-exclude = '.*golf.py'
+[tool.ruff]
+extend-exclude = ["**/golf.py"]
 
 [tool.vulture]
 exclude = [".venv/"]
