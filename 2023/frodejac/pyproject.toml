@@ -23,7 +23,7 @@ build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
 [tool.ruff]
-extend-exclude = ["**/golf.py"]
+extend-exclude = ["**/golf*.py"]
 
 [tool.vulture]
 exclude = [".venv/"]
