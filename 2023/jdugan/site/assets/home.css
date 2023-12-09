@@ -1,11 +1,13 @@
 /*---------------------------------------------------------
    main
-  ---------------------------------------------------------*/
+-----------------------------------------------------------*/
 
-  .calendar .calendar-color-b { color:#5555bb; }
-  .calendar .calendar-color-l { color:#ccccff; }
-  .calendar .calendar-color-y { color:#ffff66; text-shadow:0 0 5px #ffff66, 0 0 10px #ffff66; }
-  .calendar .calendar-color-g { color:#00cc00; }
-  .calendar .calendar-color-w { color:#ffffff; }
-  .calendar .calendar-color-n { color:#9b715b; }
-  .calendar .calendar-color-m { color:#d4dde4; }
+.calendar .calendar-color-g { color:#00cc00; }
+.calendar .calendar-color-k { color:#6b4d3b; }
+.calendar .calendar-color-m { color:#d4dde4; }
+.calendar .calendar-color-l { color:#ccccff; }
+.calendar .calendar-color-y { color:#ffff66; text-shadow:0 0 5px #ffff66, 0 0 10px #ffff66; }
+.calendar .calendar-color-b { color:#5555bb; }
+.calendar .calendar-color-n { color:#9b715b; }
+.calendar .calendar-color-w { color:#ffffff; }
+.calendar .calendar-color-s { color:#e3b585; }

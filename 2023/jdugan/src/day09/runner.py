@@ -1,3 +1,4 @@
+from src.day09.reading import Reading
 from src.utility.reader import Reader
 
 class Day09:
@@ -9,10 +10,14 @@ class Day09:
         return 9
 
     def puzzle1(self):
-        return -1
+        readings    = self.__readings()
+        predictions = [r.predict_next() for r in readings]
+        return sum(predictions)
 
     def puzzle2(self):
-        return -2
+        readings    = self.__readings()
+        predictions = [r.predict_prev() for r in readings]
+        return sum(predictions)
 
 
     # -----------------------------------------------------
@@ -21,3 +26,12 @@ class Day09:
 
     def __data(_):
         return Reader().to_lines("data/day09/input.txt")
+
+    def __readings(self):
+        lines    = self.__data()
+        readings = []
+        for line in lines:
+            history = [int(s) for s in line.split()]
+            reading = Reading(history)
+            readings.append(reading)
+        return readings
