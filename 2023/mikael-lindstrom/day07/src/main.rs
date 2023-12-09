@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 fn part1(input: &str) -> u32 {
     let card_values = "123456789TJQKA";
     let hands = input
@@ -27,25 +29,34 @@ fn part2(input: &str) -> u32 {
         .lines()
         .map(|line| {
             let (cards, bid) = line.split_once(' ').unwrap();
-            let jokers = cards.chars().filter(|&c| c == 'J').count();
-            let mut hand_type = cards
-                .chars()
-                .map(|card| cards.chars().filter(|&c| c == card && card != 'J').count())
-                .collect::<Vec<_>>();
-            hand_type.sort();
-            hand_type = hand_type.into_iter().skip(jokers).rev().collect::<Vec<_>>();
-            if jokers > 0 && jokers < 5 {
-                let first_type = hand_type[0];
-                let mut new_hand_type = vec![jokers + first_type; first_type + jokers];
-                new_hand_type.extend_from_slice(&hand_type[first_type..]);
-                hand_type = new_hand_type;
-            } else if jokers == 5 {
-                hand_type = vec![5; 5];
-            }
+
             let card_values = cards
                 .chars()
                 .map(|card| card_values.chars().position(|c| c == card).unwrap())
                 .collect::<Vec<_>>();
+
+            // Replace jokers with the most frequent card
+            let most_frequent_card = cards
+                .chars()
+                .fold(HashMap::new(), |mut acc, ch| {
+                    if ch != 'J' {
+                        *acc.entry(ch).or_insert(0) += 1;
+                    }
+                    acc
+                })
+                .into_iter()
+                .max_by_key(|&(_, count)| count)
+                .map(|(ch, _)| ch)
+                .unwrap_or('J');
+            let cards = cards.replace('J', &most_frequent_card.to_string());
+
+            let mut hand_type = cards
+                .chars()
+                .map(|card| cards.chars().filter(|&c| c == card).count())
+                .collect::<Vec<_>>();
+            hand_type.sort();
+            hand_type = hand_type.into_iter().rev().collect::<Vec<_>>();
+
             (hand_type, card_values, bid.parse::<u32>().unwrap())
         })
         .collect::<Vec<_>>();

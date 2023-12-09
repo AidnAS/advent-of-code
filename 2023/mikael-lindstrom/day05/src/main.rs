@@ -26,11 +26,11 @@ fn part1(input: &str) -> i64 {
     seeds
         .iter()
         .map(|seed| {
-            maps.iter().fold(seed.to_owned(), |acc, map| {
+            maps.iter().fold(*seed, |acc, map| {
                 map.iter()
                     .find_map(|range| {
                         if range.0.contains(&acc) {
-                            return Some(acc.saturating_add(range.1));
+                            return Some(acc.add(range.1));
                         }
                         None
                     })
@@ -70,55 +70,36 @@ fn part2(input: &str) -> i64 {
         })
         .collect::<Vec<_>>();
 
-    maps.iter()
-        .fold(seeds, |seeds, map| {
-            seeds.iter().fold(Vec::new(), |mut acc, seed| {
-                let mut remaining = Vec::new();
-                for range in map.iter() {
-                    match (range.0.contains(seed.start()), range.0.contains(seed.end())) {
-                        (true, true) => {
-                            acc.push(seed.start().add(range.1)..=seed.end().add(range.1));
-                        }
-                        (true, false) => {
-                            remaining.push(seed.start().to_owned()..=range.0.end().to_owned() - 1);
-                            acc.push(seed.start().add(range.1)..=range.0.end().add(range.1) - 1);
-                        }
-                        (false, true) => {
-                            remaining.push(range.0.start().to_owned()..=seed.end().to_owned());
-                            acc.push(range.0.start().add(range.1)..=seed.end().add(range.1));
-                        }
-                        _ => {}
+    let mut queue = seeds;
+    for map in maps.iter() {
+        let mut for_next_map = Vec::new();
+        for (range, offset) in map {
+            let mut for_next_range = Vec::new();
+            while let Some(seed) = queue.pop() {
+                match (range.contains(seed.start()), range.contains(seed.end())) {
+                    (false, true) => {
+                        for_next_range.push(*seed.start()..=*range.start() - 1);
+                        for_next_map.push(range.start().add(offset)..=seed.end().add(offset));
+                    }
+                    (true, true) => {
+                        for_next_map.push(seed.start().add(offset)..=seed.end().add(offset));
+                    }
+                    (true, false) => {
+                        for_next_range.push(*range.end() + 1..=*seed.end());
+                        for_next_map.push(seed.start().add(offset)..=range.end().add(offset));
+                    }
+                    _ => {
+                        for_next_range.push(*seed.start()..=*seed.end());
                     }
                 }
-                if acc.is_empty() {
-                    acc.push(seed.start().to_owned()..=seed.end().to_owned());
-                } else if !remaining.is_empty() {
-                    remaining.sort_by(|a, b| a.start().cmp(b.start()));
-                    // Currently only handles if seed start and/or end is outside the map
-                    match (
-                        *seed.start() < *remaining.first().unwrap().start(),
-                        *seed.end() > *remaining.last().unwrap().end(),
-                    ) {
-                        (true, false) => {
-                            acc.push(
-                                seed.start().to_owned()
-                                    ..=remaining.first().unwrap().start().to_owned() - 1,
-                            );
-                        }
-                        (false, true) => {
-                            acc.push(
-                                remaining.last().unwrap().end().to_owned() + 1
-                                    ..=seed.end().to_owned(),
-                            );
-                        }
-                        _ => {}
-                    }
-                }
-                acc
-            })
-        })
+            }
+            queue = for_next_range;
+        }
+        queue.append(&mut for_next_map);
+    }
+    queue
         .iter()
-        .map(|seed_range| seed_range.start().to_owned())
+        .map(|seed_range| *seed_range.start())
         .min()
         .unwrap()
 }
