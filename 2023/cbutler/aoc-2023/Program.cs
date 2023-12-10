@@ -29,7 +29,16 @@ class Program
         // Dec05.SolvePt2(date, useTestData);
 
         // Dec06.SolvePt1(date, useTestData);
-        Dec06.SolvePt2(date, useTestData);
+        // Dec06.SolvePt2(date, useTestData);
+
+        //Dec07.SolvePt1(date, useTestData);
+        //Dec07.SolvePt2(date, useTestData);
+
+        // Dec08.SolvePt1(date, useTestData);
+        // Dec08.SolvePt2(date, useTestData);
+
+        // Dec09.SolvePt1(date, useTestData);
+        Dec09.SolvePt2(date, useTestData);
 
         Console.ReadLine();
     }
