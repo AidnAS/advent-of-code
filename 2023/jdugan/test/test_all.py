@@ -66,12 +66,12 @@ def test_day09():
     assert Day09().puzzle2() == 1140
 
 def test_day10():
-    assert Day10().puzzle1() == -1
-    assert Day10().puzzle2() == -2
+    assert Day10().puzzle1() == 6815
+    assert Day10().puzzle2() == 269
 
 def test_day11():
-    assert Day11().puzzle1() == -1
-    assert Day11().puzzle2() == -2
+    assert Day11().puzzle1() == 9522407
+    assert Day11().puzzle2() == 544723432977
 
 def test_day12():
     assert Day12().puzzle1() == -1
