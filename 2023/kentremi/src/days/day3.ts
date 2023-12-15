@@ -14,7 +14,7 @@ async function day3(task: number, dayFileHandle: FileHandle) {
 
   for await (const line of dayFileHandle.readLines()) {
     const numbersRegex = /(\d+)/g;
-    const symbolsRegex = /([^\d\.]+)/g;
+    const symbolsRegex = task === 1 ? /([^\d\.]+)/g : /(\*+)/g;
 
     numbersMap.set(resultLine, []);
     symbolsMap.set(resultLine, []);
@@ -54,34 +54,56 @@ async function day3(task: number, dayFileHandle: FileHandle) {
 
   const addToResultMap = (
     pos: number,
+    row: number,
     key: number,
     value: Array<NumbersMap>
   ) => {
     value.forEach((val: NumbersMap) => {
       if (pos >= val.firstAdjPos && pos <= val.lastAdjPos) {
         resultMap.set(
-          key.toString() +
-            val.firstAdjPos.toString() +
-            val.lastAdjPos.toString(),
+          `${row}|${pos.toString()}|${key}|${val.firstAdjPos.toString()}|${val.lastAdjPos.toString()}`,
           val.value
         );
       }
     });
   };
 
+  // Task 1 calculation
   numbersMap.forEach((value, key) => {
     const currSymbols = symbolsMap.get(key);
     const prevSymbols = symbolsMap.get(key - 1);
     const nextSymbols = symbolsMap.get(key + 1);
 
-    currSymbols?.forEach((pos: number) => addToResultMap(pos, key, value));
-    prevSymbols?.forEach((pos: number) => addToResultMap(pos, key, value));
-    nextSymbols?.forEach((pos: number) => addToResultMap(pos, key, value));
+    currSymbols?.forEach((pos: number) => addToResultMap(pos, key, key, value));
+    prevSymbols?.forEach((pos: number) =>
+      addToResultMap(pos, key - 1, key, value)
+    );
+    nextSymbols?.forEach((pos: number) =>
+      addToResultMap(pos, key + 1, key, value)
+    );
   });
 
-  resultMap.forEach((value) => {
-    result += value;
+  // Task 2 calculation
+  const matchPairs = new Map();
+  const gearPairs: number[] = [];
+
+  resultMap.forEach((value: number, key: string) => {
+    const rowPosMatch = key.match(/(^\d+\|\d+)/);
+    if (rowPosMatch) {
+      if (matchPairs.has(rowPosMatch[0])) {
+        gearPairs.push(matchPairs.get(rowPosMatch[0]) * value);
+      }
+      matchPairs.set(rowPosMatch[0], value);
+    }
   });
+
+  task === 1
+    ? resultMap.forEach((value) => {
+        result += value;
+      })
+    : gearPairs.forEach((val) => {
+        result += val;
+      });
 
   return result.toString();
 }
