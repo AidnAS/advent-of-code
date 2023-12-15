@@ -1,3 +1,4 @@
+from src.day15.initializer import Initializer
 from src.utility.reader import Reader
 
 class Day15:
@@ -9,10 +10,12 @@ class Day15:
         return 15
 
     def puzzle1(self):
-        return -1
+        initializer = self.__initializer()
+        return initializer.checksum()
 
     def puzzle2(self):
-        return -2
+        initializer = self.__initializer()
+        return initializer.focusing_power()
 
 
     # -----------------------------------------------------
@@ -21,3 +24,8 @@ class Day15:
 
     def __data(_):
         return Reader().to_lines("data/day15/input.txt")
+
+    def __initializer(self):
+        line  = self.__data()[0]
+        steps = line.split(",")
+        return Initializer(steps)

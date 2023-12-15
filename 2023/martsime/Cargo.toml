@@ -23,3 +23,7 @@ bench = false
 [[bench]]
 name = "puzzles"
 harness = false
+
+[dependencies]
+num = "0.4.1"
+rayon = "1.8.0"

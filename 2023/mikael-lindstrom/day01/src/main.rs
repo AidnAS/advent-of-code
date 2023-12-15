@@ -22,7 +22,7 @@ fn part2(input: &str) -> u32 {
                 .enumerate()
                 .fold(Vec::new(), |mut acc, (index, c)| {
                     if c.is_ascii_digit() {
-                        acc.push(c.to_digit(10).unwrap())
+                        acc.push(c.to_digit(10).unwrap());
                     } else {
                         let substring = &line[index..];
                         match substring {

@@ -25,7 +25,7 @@ def output(results, elapsed, w=20, d=5):
 
 def main():
     t0 = time.perf_counter_ns()
-    with multiprocessing.Pool() as pool:
+    with multiprocessing.Pool(processes=8) as pool:
         results = pool.map(
             solve,
             (
