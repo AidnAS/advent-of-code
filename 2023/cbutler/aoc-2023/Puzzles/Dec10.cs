@@ -1,16 +1,13 @@
 ﻿using System.Drawing;
 using System.Reflection.Emit;
+using aoc_2023.Entities;
 using aoc_2023.Services;
 
 namespace aoc_2023.Puzzles;
 
 
 
-public class Pos
-{
-    public int X { get; set; }
-    public int Y { get; set; }
-}
+
 
 public class Tile
 {
@@ -158,7 +155,7 @@ public class Dec10
 
             for (int j = 0; j < col.Length; j++)
             {
-                map[i, j] = col[j]; 
+                map[i, j] = col[j];
                 if (map[i, j] == "S")
                 {
                     var start = new Tile(value: map[i, j], x: Convert.ToInt32(i), y: Convert.ToInt32(j));
@@ -330,7 +327,7 @@ public class Dec10
             for (int j = 0; j < numCols; j++)
             {
                 // Console.Write($" [(x:{i}, y:{j}) {map[i, j]}]");
-                
+
                 var currTileIsOnPath = TileIsOnPath(new Tile(value: map[i, j], x: Convert.ToInt32(i), y: Convert.ToInt32(j)));
 
                 // if on path, set outside
@@ -358,7 +355,7 @@ public class Dec10
                     Console.Write($"[O]");
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     continue;
-                }                
+                }
             }
             Console.WriteLine("");
             Console.WriteLine("");
@@ -462,7 +459,7 @@ public class Dec10
         {
             throw new IndexOutOfRangeException($"{currTile}, message: {e}");
         }
-        
+
     }
     #endregion
 
@@ -483,7 +480,7 @@ public class Dec10
 
         for (int i = 1; i < crossings.Count; i++)
         {
-            if (pos.Y > crossings[i-1].Position.Y && (i == crossings.Count || pos.Y < crossings[i].Position.Y) && pos.Y != numCols-1)
+            if (pos.Y > crossings[i - 1].Position.Y && (i == crossings.Count || pos.Y < crossings[i].Position.Y) && pos.Y != numCols - 1)
             {
                 // it should be between two crossings here. Check the left crossing
                 if (i % 2 == 1) return true;
@@ -518,7 +515,7 @@ public class Dec10
                     HighlightConsole($"{target}");
                 }
                 else Console.Write($"{map[i, j]}");
-                
+
                 Console.Write($"] ");
             }
             Console.WriteLine("");
