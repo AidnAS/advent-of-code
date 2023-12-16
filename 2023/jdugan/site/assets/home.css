@@ -2,15 +2,30 @@
    main
 -----------------------------------------------------------*/
 
+.calendar .calendar-color-l { color:#ccccff; }
 .calendar .calendar-color-v { color:#df2308; text-shadow:0 0 5px #df2308, 0 0 10px #df2308; }
 .calendar .calendar-color-a { color:#a5a8af; }
-.calendar .calendar-color-g { color:#00cc00; }
 .calendar .calendar-color-s { color:#e3b585; }
-.calendar .calendar-color-w { color:#ffffff; }
-.calendar .calendar-color-n { color:#9b715b; }
-.calendar .calendar-color-i { color:#a25151; }
-.calendar .calendar-color-b { color:#5555bb; }
-.calendar .calendar-color-m { color:#d4dde4; }
-.calendar .calendar-color-k { color:#6b4d3b; }
-.calendar .calendar-color-l { color:#ccccff; }
 .calendar .calendar-color-y { color:#ffff66; text-shadow:0 0 5px #ffff66, 0 0 10px #ffff66; }
+.calendar .calendar-color-i { color:#a25151; }
+.calendar .calendar-color-n { color:#9b715b; }
+.calendar .calendar-color-g { color:#00cc00; }
+.calendar .calendar-color-m { color:#d4dde4; }
+.calendar .calendar-color-b { color:#5555bb; }
+.calendar .calendar-color-k { color:#6b4d3b; }
+.calendar .calendar-color-w { color:#ffffff; }
+.calendar .lavafall {
+  position: relative;
+}
+.calendar .lavafall > span {
+  position: absolute;
+  animation: anim-calendar-lavafall 3s linear infinite;
+  display: inline-block;
+  pointer-events: none;
+}
+@keyframes anim-calendar-lavafall {
+    0% { transform: translateY(0);   opacity:0.0; color:#faa718; text-shadow: 0 0 3px #faa718, 0 0 5px #faa718, 0 0 10px #faa718, 0 0 15px #faa718, 0 0 20px #faa718; }
+   20% {                             opacity:0.8; }
+   80% {                             opacity:0.8; }
+  100% { transform: translateY(3ch); opacity:0.0; color:#df2308; text-shadow: 0 0 3px #df2308, 0 0 5px #df2308, 0 0 10px #df2308, 0 0 15px #df2308, 0 0 20px #df2308; }
+}
