@@ -6,8 +6,8 @@ async function day4(task: number, dayFileHandle: FileHandle) {
   for await (const line of dayFileHandle.readLines()) {
     const cardRegex = /.+(\d+):(.+)\|(.+)/g;
 
-    const winnerNumbers: number[][] = [];
-    const myNumbers: number[][] = [];
+    let winnerNumbers: number[] = [];
+    let myNumbers: number[] = [];
 
     let cardLine;
     while ((cardLine = cardRegex.exec(line)) !== null) {
@@ -15,13 +15,13 @@ async function day4(task: number, dayFileHandle: FileHandle) {
         cardRegex.lastIndex++;
       }
       winnerNumbers.push(
-        cardLine[2]
+        ...cardLine[2]
           .trim()
           .split(/\s+/)
           .map((wn) => parseInt(wn))
       );
       myNumbers.push(
-        cardLine[3]
+        ...cardLine[3]
           .trim()
           .split(/\s+/)
           .map((mn) => parseInt(mn))
@@ -29,8 +29,8 @@ async function day4(task: number, dayFileHandle: FileHandle) {
     }
 
     let numberOfHits = 0;
-    myNumbers[0].forEach((myNumber) => {
-      if (winnerNumbers[0].includes(myNumber)) {
+    myNumbers.forEach((myNumber) => {
+      if (winnerNumbers.includes(myNumber)) {
         numberOfHits += 1;
       }
     });
