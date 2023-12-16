@@ -47,7 +47,7 @@ def test_day04():
 
 def test_day05():
     assert Day05().puzzle1() == 282277027
-    assert Day05().puzzle2() == 11554135
+    assert Day05().puzzle2() == 11554135                # too lazy to do proper solution :)
 
 def test_day06():
     assert Day06().puzzle1() == 800280
@@ -67,7 +67,7 @@ def test_day09():
 
 def test_day10():
     assert Day10().puzzle1() == 6815
-    assert Day10().puzzle2() == 269
+    assert Day10().puzzle2() == 269                     # try shoelace algorithm instead?
 
 def test_day11():
     assert Day11().puzzle1() == 9522407
@@ -79,19 +79,19 @@ def test_day12():
 
 def test_day13():
     assert Day13().puzzle1() == 26957
-    assert Day13().puzzle2() == 42695
+    assert Day13().puzzle2() == 42695                   # slightly slow (600ms)
 
 def test_day14():
     assert Day14().puzzle1() == 110677
-    assert Day14().puzzle2() == 90551
+    assert Day14().puzzle2() == 90551                   # pretty slow (2200ms)
 
 def test_day15():
     assert Day15().puzzle1() == 517015
     assert Day15().puzzle2() == 286104
 
 def test_day16():
-    assert Day16().puzzle1() == -1
-    assert Day16().puzzle2() == -2
+    assert Day16().puzzle1() == 6883
+    assert Day16().puzzle2() == 7228                    # pretty slow (1500ms)
 
 def test_day17():
     assert Day17().puzzle1() == -1
