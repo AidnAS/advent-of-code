@@ -34,6 +34,8 @@ fn bench_puzzles(c: &mut Criterion) {
     group.bench_function("day13part02", |b| b.iter(aoc::day13::part02));
     group.bench_function("day14part01", |b| b.iter(aoc::day14::part01));
     group.bench_function("day14part02", |b| b.iter(aoc::day14::part02));
+    group.bench_function("day15part01", |b| b.iter(aoc::day15::part01));
+    group.bench_function("day15part02", |b| b.iter(aoc::day15::part02));
     group.finish()
 }
 
