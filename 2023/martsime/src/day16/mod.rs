@@ -1,8 +1,8 @@
-use std::collections::HashSet;
+use rayon::prelude::*;
 
 use crate::solution::Solution;
 
-type IndexType = i16;
+type IndexType = i32;
 
 type Position = (IndexType, IndexType);
 type Direction = (IndexType, IndexType);
@@ -19,9 +19,24 @@ struct Board<'a> {
     width: IndexType,
     height: IndexType,
 
-    visited: HashSet<Position>,
-    rays: HashSet<Ray>,
+    visited: Vec<bool>,
+    rays: Vec<bool>,
     queue: Vec<Ray>,
+    dirty: bool,
+}
+
+#[inline(always)]
+fn calculate_ray_index(ray: Ray, width: IndexType, height: IndexType) -> usize {
+    let ((x, y), direction) = ray;
+    let direction_index = match direction {
+        UP => 0,
+        DOWN => 1,
+        RIGHT => 2,
+        LEFT => 3,
+        _ => unreachable!(),
+    };
+
+    direction_index * (height * width) as usize + (y * width + x) as usize
 }
 
 impl<'a> Board<'a> {
@@ -33,27 +48,33 @@ impl<'a> Board<'a> {
             bytes: input,
             width,
             height,
-            rays: HashSet::new(),
-            visited: HashSet::new(),
-            queue: Vec::new(),
+            rays: vec![false; 4 * (width * height) as usize],
+            visited: vec![false; (width * height) as usize],
+            queue: Vec::with_capacity(100),
+            dirty: false,
         }
     }
 
     pub fn beam(&mut self, start_ray: Ray) -> u32 {
-        self.rays.clear();
-        self.visited.clear();
-        self.queue.clear();
+        if self.dirty {
+            self.rays.iter_mut().for_each(|b| *b = false);
+            self.visited.iter_mut().for_each(|b| *b = false);
+            self.queue.clear();
+            self.dirty = false;
+        }
+
         self.queue.push(start_ray);
 
         while let Some(ray) = self.queue.pop() {
             let (position, direction) = ray;
             let ((x, y), (dx, dy)) = (position, direction);
             let (nx, ny) = (x + dx, y + dy);
-            if self.rays.contains(&ray) {
+            let ray_index = calculate_ray_index(ray, self.width, self.height);
+            if self.rays[ray_index] {
                 continue;
             }
-            self.rays.insert(ray);
-            self.visited.insert(position);
+            self.rays[ray_index] = true;
+            self.visited[(y * (self.width) + x) as usize] = true;
 
             if nx < 0 || nx >= self.width || ny < 0 || ny >= self.height {
                 continue;
@@ -89,7 +110,8 @@ impl<'a> Board<'a> {
                 _ => unreachable!(),
             }
         }
-        self.visited.len() as u32
+        self.dirty = true;
+        self.visited.iter().filter(|&&b| b).count() as u32
     }
 }
 fn solve_part01(input: &[u8]) -> u32 {
@@ -98,13 +120,14 @@ fn solve_part01(input: &[u8]) -> u32 {
 }
 
 fn solve_part02(input: &[u8]) -> u32 {
-    let mut board = Board::parse(input);
+    let board = Board::parse(input);
     let width = board.width;
     let height = board.height;
     (0..height)
         .flat_map(|y| [((0, y), RIGHT), ((width - 1, y), LEFT)])
         .chain((0..width).flat_map(|x| [((x, 0), DOWN), ((x, height - 1), UP)]))
-        .map(|ray| board.beam(ray))
+        .par_bridge()
+        .map(|ray| board.clone().beam(ray))
         .max()
         .unwrap()
 }
