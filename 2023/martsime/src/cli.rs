@@ -2,7 +2,7 @@ use std::env;
 
 use crate::solution::Solution;
 
-pub const DAYS: u8 = 13;
+pub const DAYS: u8 = 14;
 
 pub struct ParsedArguments {
     pub day: Option<u8>,
@@ -68,6 +68,8 @@ pub fn get_function(day: u8, part: u8) -> fn() -> Solution {
         (12, 2) => crate::day12::part02,
         (13, 1) => crate::day13::part01,
         (13, 2) => crate::day13::part02,
+        (14, 1) => crate::day14::part01,
+        (14, 2) => crate::day14::part02,
         (_, _) => unimplemented!(),
     }
 }
