@@ -51,6 +51,8 @@ async function executeDay(dayTask: string, isTest: boolean = false) {
       return printResult('3-2', await day3(2, dayFileHandle));
     case '4-1':
       return printResult('4-1', await day4(1, dayFileHandle));
+    case '4-2':
+      return printResult('4-2', await day4(2, dayFileHandle));
     default:
       console.log(christmasGradient(`Daytask ${dayTask} is not ready yet!`));
   }
