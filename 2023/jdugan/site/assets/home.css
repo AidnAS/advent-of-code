@@ -2,18 +2,38 @@
    main
 -----------------------------------------------------------*/
 
-.calendar .calendar-color-l { color:#ccccff; }
+.calendar .calendar-color-g { color:#00cc00; }
 .calendar .calendar-color-v { color:#df2308; text-shadow:0 0 5px #df2308, 0 0 10px #df2308; }
-.calendar .calendar-color-a { color:#a5a8af; }
-.calendar .calendar-color-s { color:#e3b585; }
-.calendar .calendar-color-y { color:#ffff66; text-shadow:0 0 5px #ffff66, 0 0 10px #ffff66; }
+.calendar .calendar-color-m { color:#d4dde4; }
+.calendar .calendar-color-l { color:#ccccff; }
 .calendar .calendar-color-i { color:#a25151; }
 .calendar .calendar-color-n { color:#9b715b; }
-.calendar .calendar-color-g { color:#00cc00; }
-.calendar .calendar-color-m { color:#d4dde4; }
-.calendar .calendar-color-b { color:#5555bb; }
-.calendar .calendar-color-k { color:#6b4d3b; }
-.calendar .calendar-color-w { color:#ffffff; }
+.calendar .gearfall {
+  position: relative;
+}
+.calendar .gearfall > span {
+  position: absolute;
+  animation: anim-calendar-gearfall-b 3s linear infinite;
+  display: inline-block;
+  color: #d4dde4;
+  pointer-events: none;
+}
+.calendar .gearfall > span.gearfall-whozit, .calendar .gearfall > span.gearfall-whatzit, .calendar .gearfall > span.gearfall-thingamabob {
+  animation-name: anim-calendar-gearfall-t;
+}
+@keyframes anim-calendar-gearfall-b {
+    0% { transform: translateY(0)   rotate(0)     translateY(-.5ch); opacity:0.0; }
+   20% {                                                             opacity:1.0; }
+   80% {                                                             opacity:1.0; }
+  100% { transform: translateY(4ch) rotate(2turn) translateY(-.5ch); opacity:0.0; }
+}
+@keyframes anim-calendar-gearfall-t {
+    0% { transform: translateY(0)   rotate(0)     translateY(.5ch); opacity:0.0; }
+   10% {                                                            opacity:1.0; }
+   90% {                                                            opacity:1.0; }
+  100% { transform: translateY(4ch) rotate(2turn) translateY(.5ch); opacity:0.0; }
+}
+
 .calendar .lavafall {
   position: relative;
 }
@@ -29,3 +49,27 @@
    80% {                             opacity:0.8; }
   100% { transform: translateY(3ch); opacity:0.0; color:#df2308; text-shadow: 0 0 3px #df2308, 0 0 5px #df2308, 0 0 10px #df2308, 0 0 15px #df2308, 0 0 20px #df2308; }
 }
+
+.calendar .calendar-color-y { color:#ffff66; text-shadow:0 0 5px #ffff66, 0 0 10px #ffff66; }
+.calendar .calendar-color-b { color:#5555bb; }
+.calendar .calendar-color-k { color:#6b4d3b; }
+.calendar .calendar-color-w { color:#ffffff; }
+.calendar .sandfall {
+  position: relative;
+}
+.calendar .sandfall > span {
+  position: absolute;
+  animation: anim-calendar-sandfall 3s linear infinite;
+  display: inline-block;
+  color: #e3b585;
+  pointer-events: none;
+}
+@keyframes anim-calendar-sandfall {
+    0% { transform: translateY(0);     opacity:0.0; }
+   10% {                               opacity:0.8; }
+   90% {                               opacity:0.8; }
+  100% { transform: translateY(7.5ch); opacity:0.0; }
+}
+
+.calendar .calendar-color-a { color:#a5a8af; }
+.calendar .calendar-color-s { color:#e3b585; }
