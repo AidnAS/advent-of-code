@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day10PipeMaze", "Day10PipeM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day11CosmicExpansion", "Day11CosmicExpansion\Day11CosmicExpansion.csproj", "{A26D9035-8F63-4442-ABF1-426C402E0B69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day12HotSprings", "Day12HotSprings\Day12HotSprings.csproj", "{767F848E-367D-424A-8277-4947593FD6DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day12HotSprings", "Day12HotSprings\Day12HotSprings.csproj", "{767F848E-367D-424A-8277-4947593FD6DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day13PointOfIncidence", "Day13PointOfIncidence\Day13PointOfIncidence.csproj", "{D97DEF0B-CCC6-44C5-8BB5-8A8FD8C94BCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{767F848E-367D-424A-8277-4947593FD6DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{767F848E-367D-424A-8277-4947593FD6DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{767F848E-367D-424A-8277-4947593FD6DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D97DEF0B-CCC6-44C5-8BB5-8A8FD8C94BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D97DEF0B-CCC6-44C5-8BB5-8A8FD8C94BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D97DEF0B-CCC6-44C5-8BB5-8A8FD8C94BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D97DEF0B-CCC6-44C5-8BB5-8A8FD8C94BCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
