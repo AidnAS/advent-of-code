@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day13PointOfIncidence", "Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day14ParabolicReflectorDish", "Day14ParabolicReflectorDish\Day14ParabolicReflectorDish.csproj", "{241F64D5-3D4D-44FB-875B-32EE7A54EC52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day15LensLibrary", "Day15LensLibrary\Day15LensLibrary.csproj", "{63748A87-59D7-4263-B410-7E08B5C6842D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{241F64D5-3D4D-44FB-875B-32EE7A54EC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{241F64D5-3D4D-44FB-875B-32EE7A54EC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{241F64D5-3D4D-44FB-875B-32EE7A54EC52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63748A87-59D7-4263-B410-7E08B5C6842D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63748A87-59D7-4263-B410-7E08B5C6842D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63748A87-59D7-4263-B410-7E08B5C6842D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63748A87-59D7-4263-B410-7E08B5C6842D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
