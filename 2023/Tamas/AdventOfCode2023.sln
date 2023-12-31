@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day14ParabolicReflectorDish
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day15LensLibrary", "Day15LensLibrary\Day15LensLibrary.csproj", "{63748A87-59D7-4263-B410-7E08B5C6842D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day16TheFloorWillBeLava", "Day16TheFloorWillBeLava\Day16TheFloorWillBeLava.csproj", "{B46909A5-3571-4DF6-BED4-55FB682263EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{63748A87-59D7-4263-B410-7E08B5C6842D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63748A87-59D7-4263-B410-7E08B5C6842D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63748A87-59D7-4263-B410-7E08B5C6842D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B46909A5-3571-4DF6-BED4-55FB682263EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B46909A5-3571-4DF6-BED4-55FB682263EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B46909A5-3571-4DF6-BED4-55FB682263EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B46909A5-3571-4DF6-BED4-55FB682263EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
