@@ -1,5 +1,5 @@
 import copy
-import numpy
+from math import prod
 
 class Sorter:
     # -----------------------------------------------------
@@ -80,7 +80,7 @@ class Sorter:
                         maxval = min(maxval, val)
             limits[k] = (minval, maxval)
         perms = [max - min + 1 for (min, max) in limits.values()]
-        return numpy.prod(perms)
+        return prod(perms)
 
     def __invert_condition(self, op, val):
         match op:

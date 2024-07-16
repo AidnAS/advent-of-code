@@ -110,21 +110,21 @@ def test_day20():
     assert Day20().puzzle2() == 225514321828633
 
 def test_day21():
-    assert Day21().puzzle1() == -1
-    assert Day21().puzzle2() == -2
+    assert Day21().puzzle1() == 3632
+    assert Day21().puzzle2() == 600336060511101
 
 def test_day22():
-    assert Day22().puzzle1() == -1
-    assert Day22().puzzle2() == -2
+    assert Day22().puzzle1() == 527
+    # assert Day22().puzzle2() == 100376                # absurdly slow, sick-brain bad :)
 
 def test_day23():
-    assert Day23().puzzle1() == -1
-    assert Day23().puzzle2() == -2
+    assert Day23().puzzle1() == 2010
+    assert Day23().puzzle2() == 6318                    # slow, need to speed up finding paths
 
 def test_day24():
-    assert Day24().puzzle1() == -1
-    assert Day24().puzzle2() == -2
+    assert Day24().puzzle1() == 16589
+    assert Day24().puzzle2() == 781390555762385
 
 def test_day25():
-    assert Day25().puzzle1() == -1
+    assert Day25().puzzle1() == 562912
     assert Day25().puzzle2() == -2

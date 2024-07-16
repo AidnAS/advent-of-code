@@ -1,17 +1,21 @@
+from igraph import Graph
 from math import prod
 
-class Gear:
+class Network:
     # -----------------------------------------------------
     # Configuration
     # -----------------------------------------------------
 
-    def __init__(self, part_ids):
-        self.part_ids = part_ids
+    def __init__(self, connections):
+        self.connections = connections
 
 
     # -----------------------------------------------------
     # Public Methods
     # -----------------------------------------------------
 
-    def ratio(self):
-        return prod(self.part_ids)
+    def repaired_size(self):
+        graph  = Graph.ListDict(self.connections)
+        groups = graph.mincut()
+        sizes  = groups.sizes()
+        return prod(sizes)

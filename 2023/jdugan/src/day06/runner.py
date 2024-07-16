@@ -1,4 +1,4 @@
-import numpy
+from math import prod
 from src.utility.reader import Reader
 
 class Day06:
@@ -11,7 +11,7 @@ class Day06:
 
     def puzzle1(self):
         winners = [self.__winner_count(time, dist) for (time, dist) in self.__records()]
-        return numpy.prod(winners)
+        return prod(winners)
 
     def puzzle2(self):
         (time, dist) = self.__squashed_record()
