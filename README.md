@@ -13,7 +13,7 @@ there using your public Github, Google, Twitter or Reddit account.
 
 The repo should be writable by anyone who is a member of the Aidn organization.
 If you don't have access and believe you should have, please ask in
-the `#event-adventofcode-2023` slack channel.
+the `#event-adventofcode-2024` slack channel.
 
 **NOTE:** This repo is (intentionally) public, so it is readable by anyone.
 
@@ -42,7 +42,7 @@ the `#event-adventofcode-2023` slack channel.
 ## Community, help, discussions, questions, etc
 
 - Use github issues and tag them with the day they are for and/or
-- Join slack channel [**#event-adventofcode-2023**](https://aidn.enterprise.slack.com/archives/C067X8EL0GL)
+- Join slack channel [**#event-adventofcode-2024**](https://aidn.enterprise.slack.com/archives/C08169YMLEN)
 
 ## Suggestion
 
