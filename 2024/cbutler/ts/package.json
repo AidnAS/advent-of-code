@@ -1,0 +1,23 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:build": "tsc -w",
+    "start:run": "nodemon --config nodemon.json",
+    "start": "concurrently --raw npm:start:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "esbuild": "^0.24.0",
+    "esbuild-runner": "^2.2.2"
+  }
+}
