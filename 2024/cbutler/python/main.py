@@ -13,13 +13,13 @@ def main():
 	print('-----------------\n')
 
 	# test boilerplate
-	test_date = "01-12-2000"
-	boilerplate.solve_part1(test_date)
-	boilerplate.solve_part2(test_date, use_test_data=False)
+	# test_date = "01-12-2000"
+	# boilerplate.solve_part1(test_date)
+	# boilerplate.solve_part2(test_date, use_test_data=False)
 
 	# Run puzzle solvers
-	# dec01.solve_part1(current_date)
-	# dec01.solve_part2(current_date, use_test_data=False)
+	dec01.solve_part1(current_date, use_test_data=False) # ans: 3508942
+	dec01.solve_part2(current_date, use_test_data=False) # ans: 26593248
 
 # Run main function
 if __name__ == "__main__":

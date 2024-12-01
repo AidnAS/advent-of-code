@@ -72,8 +72,8 @@ public class DataFileReader
                     Console.WriteLine($"DataFileReader - ReadFile - strArr.Length: {strArr.Length}");
                     Console.WriteLine($"DataFileReader - ReadFile - Lines.Count: {Lines.Count}");
                     Console.WriteLine($"DataFileReader - ReadFile - Lines[0]: {Lines[0]}");
+                    Console.WriteLine("ReadFile complete.");
                 }
-                Console.WriteLine("ReadFile complete.");
 
             }
             else
