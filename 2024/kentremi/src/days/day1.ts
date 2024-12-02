@@ -1,5 +1,4 @@
-import { FileHandle } from "fs/promises";
-import { wordToNumber } from "../utils";
+import type { FileHandle } from "fs/promises";
 
 async function day1(task: number, dayFileHandle: FileHandle) {
   let result = 0;
@@ -20,16 +19,13 @@ async function day1(task: number, dayFileHandle: FileHandle) {
 
   if (task === 1) {
     const sortedLocationIds = [locationIds[0].sort(), locationIds[1].sort()];
-
     for (let i = 0; i < sortedLocationIds[0].length; i++) {
       const distance = Math.abs(
         sortedLocationIds[0][i] - sortedLocationIds[1][i]
       );
-
       result += distance;
     }
   } else {
-    const similarities: number[] = [];
     for (let i = 0; i < locationIds[0].length; i++) {
       let similarities = 0;
       for (let ii = 0; ii < locationIds[1].length; ii++) {
