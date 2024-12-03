@@ -5,7 +5,7 @@ import figlet from "figlet";
 import gradient from "gradient-string";
 import day1 from "./days/day1";
 import day2 from "./days/day2";
-import { printResult } from "./utils";
+import { printExectime, printResult } from "./utils";
 
 const program = new Command();
 
@@ -34,15 +34,21 @@ async function executeDay(dayTask: string, isTest: boolean = false) {
 
   const dayFileHandle = await fsPromise.open(fileName, "r");
 
+  const startExec = process.hrtime.bigint(); // Date.now();
+
   switch (dayTask) {
     case "1-1":
-      return printResult("1-1", await day1(1, dayFileHandle));
+      printResult("1-1", await day1(1, dayFileHandle));
+      break;
     case "1-2":
-      return printResult("1-2", await day1(2, dayFileHandle));
+      printResult("1-2", await day1(2, dayFileHandle));
+      break;
     case "2-1":
-      return printResult("2-1", await day2(1, dayFileHandle));
+      printResult("2-1", await day2(1, dayFileHandle));
+      break;
     case "2-2":
-      return printResult("2-2", await day2(2, dayFileHandle));
+      printResult("2-2", await day2(2, dayFileHandle));
+      break;
     // case "3-1":
     //   return printResult("3-1", await day3(1, dayFileHandle));
     // case "3-2":
@@ -54,6 +60,9 @@ async function executeDay(dayTask: string, isTest: boolean = false) {
     default:
       console.log(christmasGradient(`Daytask ${dayTask} is not ready yet!`));
   }
+
+  const endExec = process.hrtime.bigint();
+  printExectime(endExec - startExec);
 }
 
 if (options.day) {

@@ -9,20 +9,48 @@ async function day2(task: number, dayFileHandle: FileHandle) {
     reports.push(report.map((r) => Number(r)));
   }
 
-  reports.forEach((report) => {
+  const checkReport = (report: number[]) => {
     let isSafe = true;
-    const isIncreasing = report[0] < report[1];
+    let firstRun = true;
 
-    report.forEach((level, i) => {
-      if (report[i + 1] !== undefined) {
-        const distance = isIncreasing
-          ? report[i + 1] - level
-          : level - report[i + 1];
-        if (distance < 1 || distance > 3) {
-          isSafe = false;
+    const checkRep = (rep: number[], iteration: number) => {
+      const isIncreasing = rep[0] < rep[1];
+      rep.every((level, i) => {
+        if (rep[i + 1] !== undefined) {
+          const distance = isIncreasing
+            ? rep[i + 1] - level
+            : level - rep[i + 1];
+          if (distance < 1 || distance > 3) {
+            isSafe = false;
+            return false;
+          }
         }
+        return true;
+      });
+
+      // Go recursive if task 2
+      if (task == 2 && !isSafe && iteration < report.length) {
+        isSafe = true;
+
+        const damperedReport = report.filter(
+          (_value, arrIndex) => iteration !== arrIndex
+        );
+
+        checkRep(damperedReport, (iteration += 1));
       }
-    });
+
+      firstRun = false;
+    };
+
+    if (firstRun) {
+      checkRep(report, 0);
+    }
+
+    return isSafe;
+  };
+
+  reports.forEach((report) => {
+    let isSafe = checkReport(report);
 
     if (isSafe) {
       result += 1;
