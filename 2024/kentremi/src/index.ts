@@ -5,6 +5,7 @@ import figlet from "figlet";
 import gradient from "gradient-string";
 import day1 from "./days/day1";
 import day2 from "./days/day2";
+import day3 from "./days/day3";
 import { printExectime, printResult } from "./utils";
 
 const program = new Command();
@@ -49,14 +50,9 @@ async function executeDay(dayTask: string, isTest: boolean = false) {
     case "2-2":
       printResult("2-2", await day2(2, dayFileHandle));
       break;
-    // case "3-1":
-    //   return printResult("3-1", await day3(1, dayFileHandle));
-    // case "3-2":
-    //   return printResult("3-2", await day3(2, dayFileHandle));
-    // case "4-1":
-    //   return printResult("4-1", await day4(1, dayFileHandle));
-    // case "4-2":
-    //   return printResult("4-2", await day4(2, dayFileHandle));
+    case "3-1":
+      printResult("3-1", await day3(1, dayFileHandle));
+      break;
     default:
       console.log(christmasGradient(`Daytask ${dayTask} is not ready yet!`));
   }
