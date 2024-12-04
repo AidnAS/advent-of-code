@@ -4,6 +4,7 @@ import gradient from "gradient-string";
 import day1 from "./days/day1";
 import day2 from "./days/day2";
 import day3 from "./days/day3";
+import day4 from "./days/day4";
 import { getFileHandle, printExectime, printResult } from "./utils";
 
 const program = new Command();
@@ -49,6 +50,9 @@ async function executeDay(dayTask: string, isTest: boolean = false) {
       break;
     case "3-2":
       printResult("3-2", await day3(2, dayFileHandle));
+      break;
+    case "4-1":
+      printResult("4-1", await day4(1, dayFileHandle));
       break;
     default:
       console.log(christmasGradient(`Daytask ${dayTask} is not ready yet!`));
