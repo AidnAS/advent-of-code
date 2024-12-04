@@ -97,15 +97,15 @@ describe("day4 function", () => {
     assert.strictEqual(dayResult, "2464");
   });
 
-  // it("task 2 (test) should return x", async () => {
-  //   const dayFileHandle = await getFileHandle("4-2", true);
-  //   const dayResult = await day4(2, dayFileHandle);
-  //   assert.strictEqual(dayResult, "x");
-  // });
+  it("task 2 (test) should return 9", async () => {
+    const dayFileHandle = await getFileHandle("4-2", true);
+    const dayResult = await day4(2, dayFileHandle);
+    assert.strictEqual(dayResult, "9");
+  });
 
-  // it("task 2 should return x", async () => {
-  //   const dayFileHandle = await getFileHandle("4-2");
-  //   const dayResult = await day4(2, dayFileHandle);
-  //   assert.strictEqual(dayResult, "x");
-  // });
+  it("task 2 should return 1982", async () => {
+    const dayFileHandle = await getFileHandle("4-2");
+    const dayResult = await day4(2, dayFileHandle);
+    assert.strictEqual(dayResult, "1982");
+  });
 });
