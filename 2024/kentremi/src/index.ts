@@ -1,12 +1,10 @@
-import * as fsPromise from "fs/promises";
-
 import { Command } from "commander";
 import figlet from "figlet";
 import gradient from "gradient-string";
 import day1 from "./days/day1";
 import day2 from "./days/day2";
 import day3 from "./days/day3";
-import { printExectime, printResult } from "./utils";
+import { getFileHandle, printExectime, printResult } from "./utils";
 
 const program = new Command();
 
@@ -29,11 +27,7 @@ program
 const options = program.opts();
 
 async function executeDay(dayTask: string, isTest: boolean = false) {
-  const fileName = isTest
-    ? `./data/day${dayTask}.test`
-    : `./data/day${dayTask.charAt(0)}.txt`;
-
-  const dayFileHandle = await fsPromise.open(fileName, "r");
+  const dayFileHandle = await getFileHandle(dayTask, isTest);
 
   const startExec = process.hrtime.bigint(); // Date.now();
 

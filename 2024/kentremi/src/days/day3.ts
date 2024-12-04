@@ -69,15 +69,11 @@ async function day3(task: number, dayFileHandle: FileHandle) {
 
       sortedMulMap.forEach((mul, key) => {
         if (mul === "include") {
-          console.log("include", key);
           include = true;
         }
         if (mul === "exclude") {
-          console.log("exclude", key);
           include = false;
         }
-
-        console.log(key, include);
 
         const mulDigits = String(mul)
           .split(",")
