@@ -6,7 +6,7 @@ public static class Dec01
 {
     public static int solvePart1(string? date, bool useTestData = false)
     {
-        Console.WriteLine("Day 01, Part 1: Id lists total distance");
+        Console.WriteLine("Day 01, Part 1: Id lists total distance\n");
 
         // create a data file reader and read the file.
         var dfr = new DataFileReader(date: date, useTestData: useTestData, part: 1);
@@ -77,7 +77,7 @@ public static class Dec01
 
     public static int solvePart2(string date, bool useTestData = false)
     {
-        Console.WriteLine("Day 01, Part 2: Id lists similarity score");
+        Console.WriteLine("Day 01, Part 2: Id lists similarity score\n");
 
         // create a data file reader and read the file.
         var dfr = new DataFileReader(date: date, useTestData: useTestData, part: 1);
