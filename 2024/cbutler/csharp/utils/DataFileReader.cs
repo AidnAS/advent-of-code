@@ -88,6 +88,27 @@ public class DataFileReader
         }
     }
 
+    public void ReadFileAsSingleLine(bool verbose = false)
+    {
+        try
+        {
+            if (File.Exists(FullPath))
+            {
+                var strArr = File.ReadAllLines(FullPath);
+                Lines.Add(String.Join("", strArr));
+            }
+            else
+            {
+                throw new FileNotFoundException();
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error Reading File: {FullPath}");
+            Console.WriteLine($"stack trace: {e}");
+        }
+    }
+
 
 }
 

@@ -1,3 +1,7 @@
-# Advent of Code - Butler edition
+# Advent of Code
 
-[Original repo](https://github.com/ChristopherHButler/aoc)
+This is a repo for all advent of code puzzles.
+
+There is a folder for each year and language implementation.
+
+It is in no way exhaustive, it just contains my solutions.

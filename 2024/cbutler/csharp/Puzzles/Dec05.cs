@@ -2,13 +2,13 @@ using csharp.utils;
 
 namespace csharp.Puzzles;
 
-// This is the boilerplate code for each day's puzzle.
-public static class Boilerplate
+
+public static class Dec05
 {
-    public static void solvePart1(string? date, bool useTestData = false)
+    public static int solvePart1(string? date, bool useTestData = false)
     {
         // log current puzzle
-        Console.WriteLine("Day XX, Part 1: \n");
+        Console.WriteLine("Day 05, Part 1: \n");
 
         // create a data file reader and read the file.
         var dfr = new DataFileReader(date: date, useTestData: useTestData, part: 1);
@@ -22,17 +22,21 @@ public static class Boilerplate
         // log the solution
         var outputString = useTestData ? "Total [using test data]" : "Total [using puzzle data]";
         Console.WriteLine($"{outputString}: {dfr.Lines.Count}\n");
+
+        return 0;
     }
 
-    public static void solvePart2(string date, bool useTestData = false)
+    public static int solvePart2(string date, bool useTestData = false)
     {
         // log current puzzle
-        Console.WriteLine("Day XX, Part 2: \n");
+        Console.WriteLine("Day 05, Part 2: \n");
 
         // perform magic here
 
         // log the solution
         var outputString = useTestData ? "Total [using test data]" : "Total [using puzzle data]";
         Console.WriteLine($"{outputString}: 0\n");
+
+        return 0;
     }
 }
