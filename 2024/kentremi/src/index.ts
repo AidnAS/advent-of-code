@@ -5,6 +5,7 @@ import day1 from "./days/day1";
 import day2 from "./days/day2";
 import day3 from "./days/day3";
 import day4 from "./days/day4";
+import day5 from "./days/day5";
 import { getFileHandle, printExectime, printResult } from "./utils";
 
 const program = new Command();
@@ -56,6 +57,11 @@ async function executeDay(dayTask: string, isTest: boolean = false) {
       break;
     case "4-2":
       printResult("4-2", await day4(2, dayFileHandle));
+      break;
+    case "5-1":
+      printResult("5-1", await day5(1, dayFileHandle));
+    case "5-2":
+      printResult("5-2", await day5(2, dayFileHandle));
       break;
     default:
       console.log(christmasGradient(`Daytask ${dayTask} is not ready yet!`));
