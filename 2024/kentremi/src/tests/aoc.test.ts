@@ -6,6 +6,7 @@ import day2 from "../days/day2";
 import day3 from "../days/day3";
 import day4 from "../days/day4";
 import day5 from "../days/day5";
+import day6 from "../days/day6";
 
 describe("day1 function", () => {
   it("task 1 (test) should return 11", async () => {
@@ -135,4 +136,30 @@ describe("day5 function", () => {
     const dayResult = await day5(2, dayFileHandle);
     assert.strictEqual(dayResult, "5169");
   });
+});
+
+describe("day6 function", () => {
+  it("task 1 (test) should return 41", async () => {
+    const dayFileHandle = await getFileHandle("6-1", true);
+    const dayResult = await day6(1, dayFileHandle);
+    assert.strictEqual(dayResult, "41");
+  });
+
+  it("task 1 should return 5030", async () => {
+    const dayFileHandle = await getFileHandle("6-1");
+    const dayResult = await day6(1, dayFileHandle);
+    assert.strictEqual(dayResult, "5030");
+  });
+
+  // it("task 2 (test) should return 123", async () => {
+  //   const dayFileHandle = await getFileHandle("6-2", true);
+  //   const dayResult = await day6(2, dayFileHandle);
+  //   assert.strictEqual(dayResult, "123");
+  // });
+
+  // it("task 2 should return 5169", async () => {
+  //   const dayFileHandle = await getFileHandle("6-2");
+  //   const dayResult = await day6(2, dayFileHandle);
+  //   assert.strictEqual(dayResult, "5169");
+  // });
 });
