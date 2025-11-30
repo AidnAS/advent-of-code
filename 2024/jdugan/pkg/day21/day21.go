@@ -1,11 +1,8 @@
 package day21
 
 import (
-	"fmt"
-
-	// "github.com/elliotchance/pie/v2"
-
 	"aoc/2024/pkg/reader"
+	"fmt"
 )
 
 // ========== PUBLIC FNS ==================================
@@ -19,17 +16,37 @@ func Both() {
 }
 
 func Puzzle1() int {
-	return -1
+	cmds, dbot, cbot := data()
+	sum := 0
+	for _, cmd := range cmds {
+		code := dbot.InstructionsFor(cmd.code)
+		size := cbot.SizeAfterIterations(code, 2)
+		sum += cmd.Multiplier() * size
+	}
+	return sum
 }
 
+// 157055032722640
 func Puzzle2() int {
-	return -2
+	cmds, dbot, cbot := data()
+	sum := 0
+	for _, cmd := range cmds {
+		code := dbot.InstructionsFor(cmd.code)
+		size := cbot.SizeAfterIterations(code, 25)
+		sum += cmd.Multiplier() * size
+	}
+	return sum
 }
 
 // ========== PRIVATE FNS =================================
 
-func data() []string {
+func data() ([]Command, DoorBot, ControlBot) {
 	lines := reader.Lines("./data/day21/input.txt")
-
-	return lines
+	cmds := make([]Command, 0)
+	for _, line := range lines {
+		cmds = append(cmds, Command{code: line})
+	}
+	dbot := DoorBot{}
+	cbot := ControlBot{}
+	return cmds, dbot, cbot
 }

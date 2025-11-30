@@ -1,11 +1,9 @@
 package day15
 
 import (
-	"fmt"
-
-	// "github.com/elliotchance/pie/v2"
-
 	"aoc/2024/pkg/reader"
+	"fmt"
+	"strings"
 )
 
 // ========== PUBLIC FNS ==================================
@@ -19,17 +17,37 @@ func Both() {
 }
 
 func Puzzle1() int {
-	return -1
+	wh := data()
+	wh.PerformMoves()
+	return wh.GpsScore()
 }
 
 func Puzzle2() int {
-	return -2
+	wh := data()
+	wh.Expand()
+	wh.PerformMoves()
+	return wh.GpsScore()
 }
 
 // ========== PRIVATE FNS =================================
 
-func data() []string {
+func data() Warehouse {
 	lines := reader.Lines("./data/day15/input.txt")
+	moves := make([]string, 0)
+	points := make(map[string]Point)
 
-	return lines
+	for y, line := range lines {
+		switch {
+		case strings.Index(line, "#") > -1:
+			for x, col := range line {
+				p := Point{x: x, y: y, value: string(col)}
+				points[p.Id()] = p
+			}
+		default:
+			strs := strings.Split(line, "")
+			moves = append(moves, strs...)
+		}
+	}
+
+	return Warehouse{moves: moves, points: points}
 }

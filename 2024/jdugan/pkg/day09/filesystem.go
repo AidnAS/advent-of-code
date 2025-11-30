@@ -34,10 +34,11 @@ func (fs *FileSystem) CompressBlocks() int {
 
 func (fs *FileSystem) CompressFiles() int {
 	disk := fs.ToDisk()
+	vimap := disk.ValueIndicesById()
 	for fid := len(fs.files) - 1; fid >= 0; fid-- {
-		vidxs := disk.ValueIndicesForId(fid)
+		vidxs, _ := vimap[fid]
 		vlen := len(vidxs)
-		sidxs := disk.SpaceIndicesByLength(vlen)
+		sidxs := disk.SpaceIndicesForLength(vlen)
 		if len(sidxs) > 0 && vidxs[0] > sidxs[0] {
 			for i := 0; i < vlen; i++ {
 				disk.bytes[sidxs[i]] = disk.bytes[vidxs[i]]

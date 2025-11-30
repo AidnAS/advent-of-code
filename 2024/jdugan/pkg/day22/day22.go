@@ -1,11 +1,9 @@
 package day22
 
 import (
-	"fmt"
-
-	// "github.com/elliotchance/pie/v2"
-
 	"aoc/2024/pkg/reader"
+	"fmt"
+	"strconv"
 )
 
 // ========== PUBLIC FNS ==================================
@@ -19,17 +17,23 @@ func Both() {
 }
 
 func Puzzle1() int {
-	return -1
+	market := data()
+	return market.Checksum()
 }
 
 func Puzzle2() int {
-	return -2
+	market := data()
+	return market.BestDeal()
 }
 
 // ========== PRIVATE FNS =================================
 
-func data() []string {
+func data() Market {
 	lines := reader.Lines("./data/day22/input.txt")
-
-	return lines
+	monkeys := make([]Monkey, 0)
+	for _, line := range lines {
+		num, _ := strconv.Atoi(line)
+		monkeys = append(monkeys, Monkey{secret: num})
+	}
+	return Market{monkeys: monkeys}
 }

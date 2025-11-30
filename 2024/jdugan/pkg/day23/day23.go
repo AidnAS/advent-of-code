@@ -1,11 +1,9 @@
 package day23
 
 import (
-	"fmt"
-
-	// "github.com/elliotchance/pie/v2"
-
 	"aoc/2024/pkg/reader"
+	"fmt"
+	"strings"
 )
 
 // ========== PUBLIC FNS ==================================
@@ -19,17 +17,34 @@ func Both() {
 }
 
 func Puzzle1() int {
-	return -1
+	network := data()
+	return network.Checksum()
 }
 
-func Puzzle2() int {
-	return -2
+func Puzzle2() string {
+	network := data()
+	group := network.FindLargestGroup()
+	return strings.Join(group, ",")
 }
 
 // ========== PRIVATE FNS =================================
 
-func data() []string {
+func data() Network {
 	lines := reader.Lines("./data/day23/input.txt")
+	graph := make(map[string][]string)
 
-	return lines
+	for _, line := range lines {
+		names := strings.Split(line, "-")
+		n1 := names[0]
+		n2 := names[1]
+		for _, n := range []string{n1, n2} {
+			_, ok := graph[n]
+			if !ok {
+				graph[n] = make([]string, 0)
+			}
+		}
+		graph[n1] = append(graph[n1], n2)
+		graph[n2] = append(graph[n2], n1)
+	}
+	return Network{graph: graph}
 }

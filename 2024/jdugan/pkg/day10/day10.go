@@ -1,11 +1,9 @@
 package day10
 
 import (
-	"fmt"
-
-	// "github.com/elliotchance/pie/v2"
-
 	"aoc/2024/pkg/reader"
+	"fmt"
+	"strconv"
 )
 
 // ========== PUBLIC FNS ==================================
@@ -19,17 +17,26 @@ func Both() {
 }
 
 func Puzzle1() int {
-	return -1
+	terrain := data()
+	return terrain.GetTrailSystemScore()
 }
 
 func Puzzle2() int {
-	return -2
+	terrain := data()
+	return terrain.GetTrailSystemRating()
 }
 
 // ========== PRIVATE FNS =================================
 
-func data() []string {
+func data() Terrain {
 	lines := reader.Lines("./data/day10/input.txt")
-
-	return lines
+	terrain := Terrain{points: make(map[string]Point)}
+	for y, row := range lines {
+		for x, col := range row {
+			v, _ := strconv.Atoi(string(col))
+			p := Point{x: x, y: y, value: v}
+			terrain.UpdatePoint(p)
+		}
+	}
+	return terrain
 }

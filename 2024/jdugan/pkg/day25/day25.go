@@ -1,11 +1,12 @@
 package day25
 
 import (
-	"fmt"
-
-	// "github.com/elliotchance/pie/v2"
-
 	"aoc/2024/pkg/reader"
+	"fmt"
+	"slices"
+	"strings"
+
+	"github.com/elliotchance/pie/v2"
 )
 
 // ========== PUBLIC FNS ==================================
@@ -19,7 +20,16 @@ func Both() {
 }
 
 func Puzzle1() int {
-	return -1
+	keys, locks := data()
+	count := 0
+	for _, key := range keys {
+		for _, lock := range locks {
+			if key.Fits(lock) {
+				count += 1
+			}
+		}
+	}
+	return count
 }
 
 func Puzzle2() int {
@@ -28,8 +38,45 @@ func Puzzle2() int {
 
 // ========== PRIVATE FNS =================================
 
-func data() []string {
+func data() ([]Key, []Lock) {
 	lines := reader.Lines("./data/day25/input.txt")
+	chunks := pie.Chunk(lines, 8)
+	keys := make([]Key, 0)
+	locks := make([]Lock, 0)
+	for _, chunk := range chunks {
+		if string(chunk[0][0]) == "." {
+			key := parseKey(chunk[:7])
+			keys = append(keys, key)
+		} else {
+			lock := parseLock(chunk[:7])
+			locks = append(locks, lock)
+		}
+	}
+	return keys, locks
+}
 
-	return lines
+func parseKey(chunk []string) Key {
+	heights := parseHeights(chunk[1:6])
+	return Key{notches: heights}
+}
+
+func parseLock(chunk []string) Lock {
+	slices.Reverse(chunk)
+	heights := parseHeights(chunk[1:6])
+	return Lock{max: 5, pins: heights}
+}
+
+func parseHeights(chunk []string) []int {
+	heights := make([]int, len(chunk[0]))
+	for i, _ := range strings.Split(chunk[0], "") {
+		heights[i] = 0
+	}
+	for _, line := range chunk {
+		for i, r := range strings.Split(line, "") {
+			if string(r) == "#" {
+				heights[i] += 1
+			}
+		}
+	}
+	return heights
 }

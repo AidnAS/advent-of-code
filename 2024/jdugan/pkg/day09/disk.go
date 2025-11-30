@@ -23,6 +23,20 @@ func (d Disk) CheckSum() int {
 	return checksum
 }
 
+// ---------- HELPERS -------------------------------------
+
+func (d Disk) Print() {
+	str := ""
+	for _, v := range d.bytes {
+		if v == -1 {
+			str += "."
+		} else {
+			str += strconv.Itoa(v)
+		}
+	}
+	fmt.Println(str)
+}
+
 func (d Disk) SpaceIndices() []int {
 	idxs := make([]int, 0)
 	for i, v := range d.bytes {
@@ -33,18 +47,22 @@ func (d Disk) SpaceIndices() []int {
 	return idxs
 }
 
-func (d Disk) SpaceIndicesByLength(length int) []int {
-	spaces := d.SpaceIndices()
+func (d Disk) SpaceIndicesForLength(length int) []int {
 	idxs := make([]int, 0)
 	prev := -2
-	for _, v := range spaces {
-		if v-prev != 1 {
+	for i, v := range d.bytes {
+		if v == -1 {
+			if i-prev != 1 {
+				idxs = make([]int, 0)
+			}
+			idxs = append(idxs, i)
+			prev = i
+			if len(idxs) == length {
+				break
+			}
+		} else {
 			idxs = make([]int, 0)
-		}
-		idxs = append(idxs, v)
-		prev = v
-		if len(idxs) == length {
-			break
+			prev = -2
 		}
 	}
 	if len(idxs) != length {
@@ -63,26 +81,18 @@ func (d Disk) ValueIndices() []int {
 	return idxs
 }
 
-func (d Disk) ValueIndicesForId(id int) []int {
-	idxs := make([]int, 0)
+func (d Disk) ValueIndicesById() map[int][]int {
+	imap := make(map[int][]int, 0)
 	for i, v := range d.bytes {
-		if v == id {
-			idxs = append(idxs, i)
+		if v != -1 {
+			is, ok := imap[v]
+			if ok {
+				is = append(is, i)
+				imap[v] = is
+			} else {
+				imap[v] = []int{i}
+			}
 		}
 	}
-	return idxs
-}
-
-// ---------- UTILITIES -----------------------------------
-
-func (d Disk) Print() {
-	str := ""
-	for _, v := range d.bytes {
-		if v == -1 {
-			str += "."
-		} else {
-			str += strconv.Itoa(v)
-		}
-	}
-	fmt.Println(str)
+	return imap
 }

@@ -1,11 +1,12 @@
 package day13
 
 import (
-	"fmt"
-
-	// "github.com/elliotchance/pie/v2"
-
 	"aoc/2024/pkg/reader"
+	"aoc/2024/pkg/utility"
+	"fmt"
+	"strings"
+
+	"github.com/elliotchance/pie/v2"
 )
 
 // ========== PUBLIC FNS ==================================
@@ -19,17 +20,43 @@ func Both() {
 }
 
 func Puzzle1() int {
-	return -1
+	machines := data(0)
+	sum := 0
+	for _, m := range machines {
+		sum += m.FewestCoins(3, 1)
+	}
+	return sum
 }
 
 func Puzzle2() int {
-	return -2
+	machines := data(10000000000000)
+	sum := 0
+	for _, m := range machines {
+		sum += m.FewestCoins(3, 1)
+	}
+	return sum
 }
 
 // ========== PRIVATE FNS =================================
 
-func data() []string {
+func data(offset int) []Machine {
 	lines := reader.Lines("./data/day13/input.txt")
+	machines := make([]Machine, 0)
+	for _, chunk := range pie.Chunk(lines, 4) {
+		ax, ay := parseInts(chunk[0], "Button A: ")
+		bx, by := parseInts(chunk[1], "Button B: ")
+		px, py := parseInts(chunk[2], "Prize: ")
+		machines = append(machines, Machine{ax: ax, ay: ay, bx: bx, by: by, px: px + offset, py: py + offset})
+	}
+	return machines
+}
 
-	return lines
+func parseInts(str string, heading string) (int, int) {
+	str = strings.Replace(str, heading, "", 1)
+	str = strings.Replace(str, "X", "", 1)
+	str = strings.Replace(str, "Y", "", 1)
+	str = strings.Replace(str, "+", "", -1)
+	str = strings.Replace(str, "=", "", -1)
+	str = strings.Replace(str, " ", "", -1)
+	return utility.CoordFromId(str)
 }

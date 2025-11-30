@@ -25,3 +25,11 @@ func CoordToId(x int, y int) string {
 func Distance(a int, b int) int {
 	return pie.Abs(a - b)
 }
+
+func ReverseString(s string) string {
+	bytes := make([]byte, 0)
+	for i := len(s) - 1; i >= 0; i-- {
+		bytes = append(bytes, s[i])
+	}
+	return string(bytes)
+}

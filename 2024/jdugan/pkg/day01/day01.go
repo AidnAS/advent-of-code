@@ -1,13 +1,12 @@
 package day01
 
 import (
+	"aoc/2024/pkg/reader"
+	"aoc/2024/pkg/utility"
 	"fmt"
 	"sort"
 	"strconv"
 	"strings"
-
-	"aoc/2024/pkg/reader"
-	"aoc/2024/pkg/utility"
 )
 
 // ========== PUBLIC FNS ==================================
