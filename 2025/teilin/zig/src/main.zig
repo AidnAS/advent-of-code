@@ -54,7 +54,7 @@ pub fn main() !void {
     }
 
     const puzzel = try model.Puzzle.init(d);
-    try solver.Solver.init(puzzel);
+    try solver.Solver.init(allocator, puzzel);
 }
 
 fn parseCmd(list: *std.array_list.Managed([]const u8), cmd: []const u8) !void {
