@@ -1,0 +1,11 @@
+# general
+.DS_Store
+tmp/
+
+# python stuff
+__pycache__
+.pytest_cache/
+venv/
+
+# aoc stuff
+src/**/data/input.txt
