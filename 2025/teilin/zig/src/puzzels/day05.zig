@@ -10,7 +10,7 @@ const Range = struct {
     }
 
     pub fn overlaps(self: *const Range, other: *const Range) bool {
-        return self.contains(other.min) or self.contains(other.max);
+        return self.min <= other.max and self.max >= other.min;
     }
 
     pub fn extend(self: *Range, other: *const Range) void {
@@ -90,7 +90,7 @@ fn part2(allocator: std.mem.Allocator, input: []const u8) !u64 {
 
     var totalFresh: u64 = 0;
     for (list.items) |range| {
-        totalFresh += range.max - range.min + 1;
+        totalFresh += (range.max - range.min + 1);
     }
 
     return totalFresh;
