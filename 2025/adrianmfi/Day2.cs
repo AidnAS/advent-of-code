@@ -80,13 +80,13 @@ public static class Day2
         }
         return [.. set];
     }
-}
-
-
-record Range(long Min, long Max)
-{
-    public bool Includes(long num)
+    record Range(long Min, long Max)
     {
-        return num >= Min && num <= Max;
+        public bool Includes(long num)
+        {
+            return num >= Min && num <= Max;
+        }
     }
 }
+
+
