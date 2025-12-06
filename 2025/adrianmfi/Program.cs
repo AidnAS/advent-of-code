@@ -2,6 +2,6 @@
 using adrianmfi;
 
 var sw = System.Diagnostics.Stopwatch.StartNew();
-Console.WriteLine(Day5.Part2());
+Console.WriteLine(Day6.Part2());
 sw.Stop();
 Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds} ms");
