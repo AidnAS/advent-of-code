@@ -17,7 +17,7 @@ from src.day12.runner import Day12
 # ---------------------------------------------------------
 
 if __name__ == "__main__":
-    runner = Day05()
+    runner = Day06()
 
     print("")
     print(f"DAY {runner.day()}:")

@@ -10,21 +10,17 @@ class Day02:
         return 2
 
     def puzzle1(self):
-        ranges = self.__ranges()
-        chunks = self.__chunks_map(ranges, 2)
-        sum    = 0
-        for r in ranges:
-            sum += r.calculate_checksum(chunks)
-        return sum
+        ranges    = self.__ranges()
+        chunks    = self.__chunks_map(ranges, 2)
+        checksums = [r.calculate_checksum(chunks) for r in ranges]
+        return sum(checksums)
 
     # 25912654282
     def puzzle2(self):
         ranges = self.__ranges()
         chunks = self.__chunks_map(ranges, 100)
-        sum    = 0
-        for r in ranges:
-            sum += r.calculate_checksum(chunks)
-        return sum
+        checksums = [r.calculate_checksum(chunks) for r in ranges]
+        return sum(checksums)
 
 
     # -----------------------------------------------------

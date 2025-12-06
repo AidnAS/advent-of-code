@@ -3,3 +3,8 @@ class Reader:
         with open(path) as f:
             lines = f.readlines()
         return [line.strip() for line in lines]
+
+    def to_raw_lines(self, path):
+        with open(path) as f:
+            lines = f.readlines()
+        return lines

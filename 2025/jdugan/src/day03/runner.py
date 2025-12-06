@@ -10,16 +10,12 @@ class Day03:
         return 3
 
     def puzzle1(self):
-        sum = 0
-        for line in self.__data():
-            sum += self.__calculate_joltage(line, 2)
-        return sum
+        joltages = [self.__calculate_joltage(line, 2) for line in self.__data()]
+        return sum(joltages)
 
     def puzzle2(self):
-        sum = 0
-        for line in self.__data():
-            sum += self.__calculate_joltage(line, 12)
-        return sum
+        joltages = [self.__calculate_joltage(line, 12) for line in self.__data()]
+        return sum(joltages)
 
 
     # -----------------------------------------------------

@@ -20,9 +20,9 @@ def test_day01():
     assert Day01().puzzle1() == 982
     assert Day01().puzzle2() == 6106
 
-def test_day02():                                    # annoyingly slow
-    assert Day02().puzzle1() == 19574776074
-    assert Day02().puzzle2() == 25912654282
+def test_day02():
+    assert Day02().puzzle1() == 19574776074           # annoyingly slow
+    assert Day02().puzzle2() == 25912654282           # annoyingly slow
 
 def test_day03():
     assert Day03().puzzle1() == 17403
@@ -37,8 +37,8 @@ def test_day05():
     assert Day05().puzzle2() == 352509891817881
 
 def test_day06():
-    assert Day06().puzzle1() == -1
-    assert Day06().puzzle2() == -2
+    assert Day06().puzzle1() == 6209956042374
+    assert Day06().puzzle2() == 12608160008022
 
 def test_day07():
     assert Day07().puzzle1() == -1
