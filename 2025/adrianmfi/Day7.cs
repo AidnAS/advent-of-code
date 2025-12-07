@@ -109,46 +109,6 @@ public static partial class Day7
 
     record Position(int Row, int Col);
 
-    class Manifold
-    {
-        private readonly Dictionary<int, List<int>> ColRowMapSorted = [];
-        public Manifold(List<Position> splitterPositionsRowSorted)
-        {
-
-            foreach (var position in splitterPositionsRowSorted)
-            {
-                if (!ColRowMapSorted.TryGetValue(position.Col, out List<int>? value))
-                {
-                    value = [];
-                    ColRowMapSorted[position.Col] = value;
-                }
-
-                value.Add(position.Row);
-            }
-
-        }
-        public Position? GetNextSplitter(Position fromPosition)
-        {
-            if (!ColRowMapSorted.TryGetValue(fromPosition.Col, out List<int>? col))
-            {
-                return null;
-            }
-
-            Position? firstAfter = null;
-            foreach (var row in col)
-            {
-                if (row > fromPosition.Row)
-                {
-                    return new(row, fromPosition.Col);
-                }
-            }
-
-            return firstAfter;
-        }
-
-    }
-
-
     private static int[] AllIndexesOf(this string s, char value)
     {
         List<int> res = [];
